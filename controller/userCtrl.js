@@ -17,7 +17,7 @@ const createUser = asyncHandler(async(req, res) => {
 });
 const loginUserCtrl = asyncHandler(async(req, res) => {
     const { email, password } = req.body;
-    //check if user exists or not
+    //check if user exists or not mm
     const findUser = await User.findOne({ email });
     if (findUser && await findUser.isPasswordMatched(password)) {
         const refreshToken = await generateRefreshToken(findUser._id);
