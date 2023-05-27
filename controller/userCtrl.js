@@ -17,7 +17,7 @@ const createUser = asyncHandler(async(req, res) => {
 });
 const loginUserCtrl = asyncHandler(async(req, res) => {
     const { email, password } = req.body;
-    //check if user exists or not mm
+    //check if user exists or not 
     const findUser = await User.findOne({ email });
     if (findUser && await findUser.isPasswordMatched(password)) {
         const refreshToken = await generateRefreshToken(findUser._id);
@@ -77,7 +77,10 @@ const logout = asyncHandler(async(req, res) => {
         });
         return res.sendStatus(204); // forbidden
     }
-    await User.findOneAndUpdate(refreshToken, {
+    // await User.findOneAndUpdate(refreshToken, {
+    //     refreshToken: "",
+    // });
+    await User.findOneAndUpdate({ refreshToken: refreshToken }, {
         refreshToken: "",
     });
     res.clearCookie("refreshToken", {
