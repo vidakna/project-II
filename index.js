@@ -44,7 +44,7 @@ app.listen(PORT, () => {
 // });
 
 app.use("/", (req, res) => {
-    res.send("Hello  from server side");
+    res.send("Helloo from server side");
 });
 // app.listen(PORT, () => {
 //     console.log('Server is running  at PORT ${PORT}');
