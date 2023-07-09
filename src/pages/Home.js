@@ -10,20 +10,22 @@ import Container from "../components/Container";
 const Home = () => {
   return (
     <>
-      <Container class1="home-wrapper-1 py-5">
+    
+      <Container class1="home-wrapper-1 py-4">
+        
         <div className="row">
           <div className="col-6">
             <div className="main-banner position-relative ">
               <img
-                src="images/main-banner-1.jpg"
+                src="images/back.jpg"
                 className="img-fluid rounded-3"
                 alt="main banner"
               />
               <div className="main-banner-content position-absolute">
-                <h4>SUPERCHARGED FOR PROS.</h4>
-                <h5>iPad S13+ Pro.</h5>
-                <p>From $999.00 or $41.62/mo.</p>
-                <Link className="button">BUY NOW</Link>
+                <h4>introducing.</h4>
+                <h5>iphone 14</h5>
+                <p>From Rs.325000</p>
+                <Link className="button-main-banner">BUY NOW</Link>
               </div>
             </div>
           </div>
@@ -37,9 +39,9 @@ const Home = () => {
                 />
                 <div className="small-banner-content position-absolute">
                   <h4>Best Sake</h4>
-                  <h5>iPad S13+ Pro.</h5>
+                  <h5>JBL</h5>
                   <p>
-                    From $999.00 <br /> or $41.62/mo.
+                  From RS.35000<br />
                   </p>
                 </div>
               </div>
@@ -51,9 +53,9 @@ const Home = () => {
                 />
                 <div className="small-banner-content position-absolute">
                   <h4>NEW ARRIVAL</h4>
-                  <h5>But IPad Air</h5>
+                  <h5>I Watch</h5>
                   <p>
-                    From $999.00 <br /> or $41.62/mo.
+                    From Rs.20000 <br /> 
                   </p>
                 </div>
               </div>
@@ -65,9 +67,9 @@ const Home = () => {
                 />
                 <div className="small-banner-content position-absolute">
                   <h4>NEW ARRIVAL</h4>
-                  <h5>But IPad Air</h5>
+                  <h5>Air Pods</h5>
                   <p>
-                    From $999.00 <br /> or $41.62/mo.
+                    From RS.40000 <br /> 
                   </p>
                 </div>
               </div>
@@ -79,9 +81,9 @@ const Home = () => {
                 />
                 <div className="small-banner-content position-absolute">
                   <h4>NEW ARRIVAL</h4>
-                  <h5>But IPad Air</h5>
+                  <h5>Air Pods Max</h5>
                   <p>
-                    From $999.00 <br /> or $41.62/mo.
+                    From Rs.75000 <br /> 
                   </p>
                 </div>
               </div>
@@ -89,10 +91,10 @@ const Home = () => {
           </div>
         </div>
       </Container>
-      <Container class1="home-wrapper-2 py-5">
+      <Container class1="home-wrapper-1 py-5">
         <div className="row">
           <div className="col-12">
-            <div className="servies d-flex align-items-center justify-content-between">
+            <div className="servies d-flex align-items-center justify-content-between card-wrapper-service">
               {/* {services?.map((i, j) => {
                 return (
                   <div className="d-flex align-items-center gap-15" key={j}>
@@ -104,11 +106,46 @@ const Home = () => {
                   </div>
                 );
               })} */}
+
+              <div className="d-flex align-item-center gap-15">
+                <img src="images/service-02.png" />
+                
+                <div>
+                <h5 class=" service-font">24H SERVICE</h5>
+        
+                </div>
+              </div>
+              <div className="d-flex align-item-center gap-15">
+                <img src="images/service-03.png" />
+                
+                <div>
+                <h5 class=" service-font">CASH ON DELIVERY</h5>
+        
+                </div>
+              </div>
+              <div className="d-flex align-item-center gap-14">
+                <img src="images/service-04.png" />
+                
+                <div>
+                <h5 class=" service-font">ISLAND WIDE DELIVERY</h5>
+        
+                </div>
+              </div>
+              <div className="d-flex align-item-center gap-14">
+                <img src="images/service-01.png" />
+                
+                <div>
+                <h5 class=" service-font">QUALITY PRODUCTS</h5>
+        
+                </div>
+              </div>
+
+             
             </div>
           </div>
         </div>
       </Container>
-      <Container class1="home-wrapper-2 py-5">
+      {/* <Container class1="home-wrapper-2 py-5">
         <div className="row">
           <div className="col-12">
             <div className="categories d-flex justify-content-between flex-wrap align-items-center">
@@ -171,7 +208,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </Container>
+      </Container> */}
       <Container class1="featured-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-12">
@@ -195,25 +232,12 @@ const Home = () => {
               />
               <div className="famous-content position-absolute">
                 <h5>Big Screen</h5>
-                <h6>Smart Watch Series 7</h6>
-                <p>From $399or $16.62/mo. for 24 mo.*</p>
+                <h6>Smart Watch Series 7</h6> 
+                <p>From Rs.45000</p>
               </div>
             </div>
           </div>
-          <div className="col-3">
-            <div className="famous-card position-relative">
-              <img
-                src="images/famous-2.webp"
-                className="img-fluid"
-                alt="famous"
-              />
-              <div className="famous-content position-absolute">
-                <h5 className="text-dark">Studio Display</h5>
-                <h6 className="text-dark">600 nits of brightness.</h6>
-                <p className="text-dark">27-inch 5K Retina display</p>
-              </div>
-            </div>
-          </div>
+
           <div className="col-3">
             <div className="famous-card position-relative">
               <img
@@ -223,13 +247,28 @@ const Home = () => {
               />
               <div className="famous-content position-absolute">
                 <h5 className="text-dark">smartphones</h5>
-                <h6 className="text-dark">Smartphone 13 Pro.</h6>
+                <h6 className="text-dark">Iphone 13 Pro.</h6>
                 <p className="text-dark">
-                  Now in Green. From $999.00 or $41.62/mo. for 24 mo. Footnote*
+                   From Rs.325000
                 </p>
               </div>
             </div>
           </div>
+          <div className="col-3">
+            <div className="famous-card position-relative">
+              <img
+                src="images/famous-2.jpg"
+                className="img-fluid"
+                alt="famous"
+              />
+              <div className="famous-content position-absolute">
+                <h5 className="text-dark">HandFree</h5>
+                <h6 className="text-dark">Quility sounds.</h6>
+                <p className="text-dark">From Rs.1200</p>
+              </div>
+            </div>
+          </div>
+          
           <div className="col-3">
             <div className="famous-card position-relative">
               <img
@@ -238,10 +277,10 @@ const Home = () => {
                 alt="famous"
               />
               <div className="famous-content position-absolute">
-                <h5 className="text-dark">home speakers</h5>
-                <h6 className="text-dark">Room-filling sound.</h6>
+                <h5 className="text-dark">Iphone</h5>
+                <h6 className="text-dark">i phone 13</h6>
                 <p className="text-dark">
-                  From $699 or $116.58/mo. for 12 mo.*
+                  From Rs.300000
                 </p>
               </div>
             </div>
@@ -249,7 +288,7 @@ const Home = () => {
         </div>
       </Container>
 
-      <Container class1="special-wrapper py-5 home-wrapper-2">
+      {/* <Container class1="special-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-12">
             <h3 className="section-heading">Special Products</h3>
@@ -261,7 +300,7 @@ const Home = () => {
           <SpecialProduct />
           <SpecialProduct />
         </div>
-      </Container>
+      </Container> */}
       <Container class1="popular-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-12">
@@ -293,7 +332,7 @@ const Home = () => {
                   <img src="images/brand-04.png" alt="brand" />
                 </div>
                 <div className="mx-4 w-25">
-                  <img src="images/brand-05.png" alt="brand" />
+                  <img src="images/brand-08.png" alt="brand" />
                 </div>
                 <div className="mx-4 w-25">
                   <img src="images/brand-06.png" alt="brand" />
@@ -301,8 +340,8 @@ const Home = () => {
                 <div className="mx-4 w-25">
                   <img src="images/brand-07.png" alt="brand" />
                 </div>
-                <div className="mx-4 w-25">
-                  <img src="images/brand-08.png" alt="brand" />
+                <div className="mx-4 w-25 ">
+                  <img src="images/brand-05.png" alt="brand" />
                 </div>
               </Marquee>
             </div>

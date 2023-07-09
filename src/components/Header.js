@@ -6,35 +6,21 @@ import wishlist from "../images/wishlist.svg";
 import user from "../images/user.svg";
 import cart from "../images/cart.svg";
 import menu from "../images/menu.svg";
+import logo from "../images/logo.png";
 const Header = () => {
   return (
     <>
-      <header className="header-top-strip py-3">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-6">
-              <p className="text-white mb-0">
-                Free Shipping Over $100 & Free Returns
-              </p>
-            </div>
-            <div className="col-6">
-              <p className="text-end text-white mb-0">
-                Hotline:
-                <a className="text-white" href="tel:+91 8264954234">
-                  +91 8264954234
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </header>
+     
       <header className="header-upper py-3">
-        <div className="container-xxl">
+         <div className="container-xxl">
           <div className="row align-items-center">
             <div className="col-2">
-              <h2>
-                <Link className="text-white">Dev Corner</Link>
-              </h2>
+            <Link
+                    to="/"
+                    className="d-flex align-items-center gap-10 text-white "
+                  >
+            <img class="logo" src={logo} alt="Logo" />
+            </Link>
             </div>
             <div className="col-5">
               <div className="input-group">
@@ -45,7 +31,7 @@ const Header = () => {
                   aria-label="Search Product Here..."
                   aria-describedby="basic-addon2"
                 />
-                <span className="input-group-text p-3" id="basic-addon2">
+                <span className="input-group-text p-2" id="basic-addon2">
                   <BsSearch className="fs-6" />
                 </span>
               </div>
@@ -93,7 +79,7 @@ const Header = () => {
                     <img src={cart} alt="cart" />
                     <div className="d-flex flex-column gap-10">
                       <span className="badge bg-white text-dark">0</span>
-                      <p className="mb-0">$ 500</p>
+                      <p className="mb-0">Rs 500</p>
                     </div>
                   </Link>
                 </div>
@@ -102,7 +88,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <header className="header-bottom py-3">
+      <header className="header-bottom py-1">
         <div className="container-xxl">
           <div className="row">
             <div className="col-12">
@@ -151,11 +137,14 @@ const Header = () => {
                     <NavLink to="/contact">Contact</NavLink>
                   </div>
                 </div>
+              
               </div>
             </div>
           </div>
         </div>
+        
       </header>
+      
     </>
   );
 };

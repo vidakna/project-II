@@ -4,10 +4,10 @@
   box-sizing: border-box;
 }
 :root {
-  --color-131921: #131921;
-  --color-3b4149: #3b4149;
-  --color-febd69: #febd69;
-  --color-232f3e: #232f3e;
+  --color-021f22: #021f22;
+  --color-31453a: #31453a;
+  --color-ffd700: #ffd700;
+  --color-00434e: #00434e;
   --color-bf4800: #bf4800;
   --color-f5f5f7: #f5f5f7;
   --color-ededed: #ededed;
@@ -19,6 +19,8 @@
   line-height: 32px;
   font-weight: 500;
   margin-bottom: 30px;
+  text-align: center;
+
 }
 .card-wrapper {
   background-color: white;
@@ -48,30 +50,36 @@ a {
 }
 
 .button {
-  background-color: var(--color-232f3e);
-  color: rgb(95, 35, 35);
+  background-color: var(--color-31453a);
+  color: rgb(238, 239, 243);
   font-size: 14px;
   padding: 13px 33px;
   border-radius: 25px;
 }
 .button:hover {
-  background-color: var(--color-febd69);
-  color: #131921;
+  background-color: var(--color-ffd700);
+  color: #021f22;
 }
 /* Header Part */
-
+.logo{
+  height: 60px;
+  padding: 3px;
+  width: 200px;
+}
 .header-top-strip {
-  border-bottom: 1px solid var(--color-3b4149);
-  background-color: var(--color-131921);
+  border-bottom: 1px solid var(--color-31453a);
+  background-color: var(--color-021f22);
 }
 .header-upper {
-  background-color: var(--color-131921);
+  background-color: var(--color-021f22);
+  position: re;
 }
 .header-bottom {
-  background-color: var(--color-232f3e);
+  background-color: var(--color-00434e);
+ 
 }
 .header-upper .input-group-text {
-  background-color: var(--color-febd69);
+  background-color: var(--color-ffd700);
 }
 .header-upper.header-upper-links img {
   width: 35px;
@@ -91,32 +99,32 @@ a {
   box-shadow: none;
 }
 .header-bottom .dropdown-menu {
-  background-color: var(--color-131921);
+  background-color: var(--color-021f22);
   width: 100%;
   transform: translate3d(0px, 57px, 0px) !important;
 }
 .header-bottom .dropdown-item {
   padding: 20px;
   margin-bottom: 3px;
-  border-bottom: 1px solid var(--color-3b4149);
+  border-bottom: 1px solid var(--color-31453a);
 }
 .header-bottom .dropdown-item:hover {
   background-color: transparent;
-  color: var(--color-febd69) !important;
+  color: var(--color-ffd700) !important;
 }
 /* Header Part End Here */
 
 /* Footer Part */
 
 footer {
-  background-color: var(--color-232f3e);
+  background-color: var(--color-00434e);
 }
 
 footer:not(:first-child) {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 footer .input-group-text {
-  background-color: var(--color-232f3e);
+  background-color: var(--color-00434e);
   color: white;
   padding: 8px 17px;
 }
@@ -137,6 +145,7 @@ footer .input-group-text {
   text-transform: uppercase;
 }
 .main-banner-content h5 {
+  color: var(--color-f5f5f7);
   font-size: 42px;
   line-height: 54px;
   letter-spacing: -2px;
@@ -148,7 +157,25 @@ footer .input-group-text {
   font-size: 18px;
   line-height: 28px;
   letter-spacing: 0.4;
-  color: var(--color-131921);
+  color: var(--color-f5f5f7);
+}
+
+.button-main-banner{
+  background-color: var(--color-ffd700);
+  color: var(--color-021f22);
+  font-size: 17px;
+  padding: 13px 33px;
+  border-radius: 25px;
+
+}
+
+.button-main-banner:hover{
+  background-color: rgb(195, 195, 195);
+  color: var(--color-021f22);
+  font-size: 17px;
+  padding: 13px 33px;
+  border-radius: 25px;
+
 }
 .small-banner-content {
   top: 25%;
@@ -175,7 +202,7 @@ footer .input-group-text {
   font-size: 14px;
   line-height: 22px;
   letter-spacing: 0.4;
-  color: var(--color-131921);
+  color: var(--color-021f22);
 }
 .small-banner {
   width: 49%;
@@ -185,8 +212,24 @@ footer .input-group-text {
 .home-wrapper-2 {
   background-color: var(--color-f5f5f7);
 }
+.card-wrapper-service {
+  background-color: var(--color-f5f5f7);
+  box-shadow: 20 20 20px #ffffff1a;
+  padding: 30px ;
+  border-radius: 10px;
+}
 
 /* home wrapper 2 ends */
+
+/* home wrapper 3 */
+.home-wrapper-3 {
+  background-color: rgb(233, 233, 240);
+}
+.service-font{
+  color: #bf4800;
+}
+/* home wrapper 3 ends */
+
 
 /* categories section */
 
@@ -246,7 +289,7 @@ footer .input-group-text {
 }
 .blog-content h5 {
   font-size: 18px;
-  color: var(--color-131921);
+  color: var(--color-021f22);
 }
 .blog-content p.desc {
   font-size: 13px;
@@ -391,8 +434,8 @@ footer .input-group-text {
   border-color: rgba(0, 0, 0, 0.25);
 }
 .filter-card .form-check-input:checked {
-  background-color: var(--color-febd69);
-  border-color: var(--color-febd69);
+  background-color: var(--color-ffd700);
+  border-color: var(--color-ffd700);
 }
 .sub-title {
   font-size: 14px;
@@ -568,12 +611,12 @@ footer .input-group-text {
   color: var(--color-1c1c1b);
 }
 .signup {
-  background-color: var(--color-febd69);
-  color: var(--color-131921);
+  background-color: var(--color-ffd700);
+  color: var(--color-021f22);
   border: none;
 }
 .signup:hover {
-  background-color: var(--color-131921);
+  background-color: var(--color-021f22);
   color: white;
 }
 /*  auth card  ends*/

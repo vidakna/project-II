@@ -5,7 +5,7 @@ import prodcompare from "../images/prodcompare.svg";
 import wish from "../images/wish.svg";
 import wishlist from "../images/wishlist.svg";
 import watch from "../images/watch.jpg";
-import watch2 from "../images/watch-1.avif";
+import watch2 from "../images/watch1.jpg";
 import addcart from "../images/add-cart.svg";
 import view from "../images/view.svg";
 const ProductCard = (props) => {
@@ -40,9 +40,9 @@ const ProductCard = (props) => {
             <img src={watch2} className="img-fluid" alt="product image" />
           </div>
           <div className="product-details">
-            <h6 className="brand">Havels</h6>
+            <h6 className="brand">Smart Watch</h6>
             <h5 className="product-title">
-              Kids headphones bulk 10 pack multi colored for students
+            The Haylou RS4 Plus with a 368*448 Pixel’s unprecedented visual clarity.
             </h5>
             <ReactStars
               count={5}
@@ -52,12 +52,9 @@ const ProductCard = (props) => {
               activeColor="#ffd700"
             />
             <p className={`description ${grid === 12 ? "d-block" : "d-none"}`}>
-              At vero eos et accusamus et iusto odio dignissimos ducimus qui
-              blanditiis praesentium voluptatum deleniti atque corrupti quos
-              dolores et quas molestias excepturi sint occaecati cupiditate non
-              provident, similique sunt...
+            The Haylou RS4 Plus with a 368*448 Pixel’s unprecedented visual clarity, the large 1.78-inch screen provides a precise and clear experience anytime, anywhere. The 60Hz refresh rate continues to optimize the user experience, which is rarely for round smartwatches that can be currently available.
             </p>
-            <p className="price">$100.00</p>
+            <p className="price">RS.25000.00</p>
           </div>
           <div className="action-bar position-absolute">
             <div className="d-flex flex-column gap-15">
@@ -99,9 +96,9 @@ const ProductCard = (props) => {
             <img src={watch2} className="img-fluid" alt="product image" />
           </div>
           <div className="product-details">
-            <h6 className="brand">Havels</h6>
+            <h6 className="brand">Smart Watch</h6>
             <h5 className="product-title">
-              Kids headphones bulk 10 pack multi colored for students
+            The Haylou RS4 Plus with a 368*448 Pixel’s unprecedented visual clarity.
             </h5>
             <ReactStars
               count={5}
@@ -111,12 +108,9 @@ const ProductCard = (props) => {
               activeColor="#ffd700"
             />
             <p className={`description ${grid === 12 ? "d-block" : "d-none"}`}>
-              At vero eos et accusamus et iusto odio dignissimos ducimus qui
-              blanditiis praesentium voluptatum deleniti atque corrupti quos
-              dolores et quas molestias excepturi sint occaecati cupiditate non
-              provident, similique sunt...
+            The Haylou RS4 Plus with a 368*448 Pixel’s unprecedented visual clarity, the large 1.78-inch screen provides a precise and clear experience anytime, anywhere. The 60Hz refresh rate continues to optimize the user experience, which is rarely for round smartwatches that can be currently available.
             </p>
-            <p className="price">$100.00</p>
+            <p className="price">Rs.25000.00</p>
           </div>
           <div className="action-bar position-absolute">
             <div className="d-flex flex-column gap-15">
