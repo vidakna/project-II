@@ -277,7 +277,7 @@ const Home = () => {
                 alt="famous"
               />
               <div className="famous-content position-absolute">
-                <h5 className="text-dark">Iphone</h5>
+                <h5 className="text-dark">Iphone s</h5>
                 <h6 className="text-dark">i phone 13</h6>
                 <p className="text-dark">
                   From Rs.300000

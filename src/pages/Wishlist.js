@@ -26,9 +26,9 @@ const Wishlist = () => {
               </div>
               <div className="py-3 px-3">
                 <h5 className="title">
-                  Honor T1 7.0 1 GB RAM 8 GB ROM 7 Inch With Wi-Fi+3G Tablet
+                The Haylou RS4 Plus with a 368*448 Pixel’s unprecedented visual clarity.
                 </h5>
-                <h6 className="price">$ 100</h6>
+                <h6 className="price">Rs.15000</h6>
               </div>
             </div>
           </div>
@@ -48,9 +48,9 @@ const Wishlist = () => {
               </div>
               <div className="py-3 px-3">
                 <h5 className="title">
-                  Honor T1 7.0 1 GB RAM 8 GB ROM 7 Inch With Wi-Fi+3G Tablet
+                The Haylou RS4 Plus with a 368*448 Pixel’s unprecedented visual clarity.
                 </h5>
-                <h6 className="price">$ 100</h6>
+                <h6 className="price">Rs.15000</h6>
               </div>
             </div>
           </div>
@@ -70,9 +70,9 @@ const Wishlist = () => {
               </div>
               <div className="py-3 px-3">
                 <h5 className="title">
-                  Honor T1 7.0 1 GB RAM 8 GB ROM 7 Inch With Wi-Fi+3G Tablet
+                The Haylou RS4 Plus with a 368*448 Pixel’s unprecedented visual clarity.
                 </h5>
-                <h6 className="price">$ 100</h6>
+                <h6 className="price">Rs.15000</h6>
               </div>
             </div>
           </div>

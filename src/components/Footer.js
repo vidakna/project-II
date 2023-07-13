@@ -42,13 +42,13 @@ const Footer = () => {
                   
                 </address>
                 <a
-                  href="tel:+91 8264954234"
+                  href="tel:+9 +94 775432498"
                   className="mt-3 d-block mb-1 text-white"
                 >
-                  +94 775432498
+                  +94 77 54 32 498
                 </a>
                 <a
-                  href="mailto:navdeepdahiya753@gmail.com"
+                  href="mailto:dineshchathuranga@gmail.com"
                   className="mt-2 d-block mb-0 text-white"
                 >
                   dineshchathuranga@gmail.com

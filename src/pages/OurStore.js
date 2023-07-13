@@ -138,7 +138,7 @@ const OurStore = () => {
                   </div>
                   <div className="w-50">
                     <h5>
-                      Kids headphones bulk 10 pack multi colored for students
+                    The Haylou RS4 Plus with a 368*448 Pixel’s unprecedented visual clarity.
                     </h5>
                     <ReactStars
                       count={5}
@@ -147,7 +147,7 @@ const OurStore = () => {
                       edit={false}
                       activeColor="#ffd700"
                     />
-                    <b>$ 300</b>
+                    <b>Rs.25000</b>
                   </div>
                 </div>
                 <div className="random-products d-flex">
@@ -160,7 +160,7 @@ const OurStore = () => {
                   </div>
                   <div className="w-50">
                     <h5>
-                      Kids headphones bulk 10 pack multi colored for students
+                    The Haylou RS4 Plus with a 368*448 Pixel’s unprecedented visual clarity.
                     </h5>
                     <ReactStars
                       count={5}
@@ -169,7 +169,7 @@ const OurStore = () => {
                       edit={false}
                       activeColor="#ffd700"
                     />
-                    <b>$ 300</b>
+                    <b>Rs.25000</b>
                   </div>
                 </div>
               </div>
