@@ -112,6 +112,12 @@ a {
   background-color: transparent;
   color: var(--color-ffd700) !important;
 }
+
+.header-banner-img{
+  height: auto;
+  width: 100%;
+
+}
 /* Header Part End Here */
 
 /* Footer Part */
@@ -132,8 +138,8 @@ footer .input-group-text {
 
 /* Home Page */
 .main-banner-content {
-  top: 15%;
-  left: 5%;
+  top: 30%;
+  left: 12%;
 }
 .main-banner-content h4 {
   font-size: 16px;

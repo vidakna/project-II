@@ -5,92 +5,29 @@ import BlogCard from "../components/BlogCard";
 import ProductCard from "../components/ProductCard";
 import SpecialProduct from "../components/SpecialProduct";
 import Container from "../components/Container";
+import Meta from "../components/Meta";
 //import { services } from "../";
 
 const Home = () => {
   return (
     <>
-    
-      <Container class1="home-wrapper-1 py-4">
-        
-        <div className="row">
-          <div className="col-6">
-            <div className="main-banner position-relative ">
+    <Meta title={"Home"} />
+
+
+      <div >
               <img
-                src="images/back.jpg"
-                className="img-fluid rounded-3"
+                src="images/back1.jpg"
+                className="header-banner-img"
                 alt="main banner"
               />
-              <div className="main-banner-content position-absolute">
-                <h4>introducing.</h4>
-                <h5>iphone 14</h5>
-                <p>From Rs.325000</p>
-                <Link className="button-main-banner">BUY NOW</Link>
+               <div className="main-banner-content position-absolute">
+                <h4>FOR YOUR SMART LIFE,</h4>
+                <h5>EVERYTHINGS</h5>
+                <p>YOU NEED</p>
+                <Link className="button-main-banner">CLICK HERE</Link>
               </div>
-            </div>
-          </div>
-          <div className="col-6">
-            <div className="d-flex flex-wrap gap-10 justify-content-between align-items-center">
-              <div className="small-banner position-relative">
-                <img
-                  src="images/catbanner-01.jpg"
-                  className="img-fluid rounded-3"
-                  alt="main banner"
-                />
-                <div className="small-banner-content position-absolute">
-                  <h4>Best Sake</h4>
-                  <h5>JBL</h5>
-                  <p>
-                  From RS.35000<br />
-                  </p>
-                </div>
-              </div>
-              <div className="small-banner position-relative">
-                <img
-                  src="images/catbanner-02.jpg"
-                  className="img-fluid rounded-3"
-                  alt="main banner"
-                />
-                <div className="small-banner-content position-absolute">
-                  <h4>NEW ARRIVAL</h4>
-                  <h5>I Watch</h5>
-                  <p>
-                    From Rs.20000 <br /> 
-                  </p>
-                </div>
-              </div>
-              <div className="small-banner position-relative ">
-                <img
-                  src="images/catbanner-03.jpg"
-                  className="img-fluid rounded-3"
-                  alt="main banner"
-                />
-                <div className="small-banner-content position-absolute">
-                  <h4>NEW ARRIVAL</h4>
-                  <h5>Air Pods</h5>
-                  <p>
-                    From RS.40000 <br /> 
-                  </p>
-                </div>
-              </div>
-              <div className="small-banner position-relative ">
-                <img
-                  src="images/catbanner-04.jpg"
-                  className="img-fluid rounded-3"
-                  alt="main banner"
-                />
-                <div className="small-banner-content position-absolute">
-                  <h4>NEW ARRIVAL</h4>
-                  <h5>Air Pods Max</h5>
-                  <p>
-                    From Rs.75000 <br /> 
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Container>
+      </div>
+    
       <Container class1="home-wrapper-1 py-5">
         <div className="row">
           <div className="col-12">
@@ -221,7 +158,7 @@ const Home = () => {
         </div>
       </Container>
 
-      <Container class1="famous-wrapper py-5 home-wrapper-2">
+      {/* <Container class1="famous-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-3">
             <div className="famous-card position-relative">
@@ -286,7 +223,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </Container>
+      </Container> */}
 
       {/* <Container class1="special-wrapper py-5 home-wrapper-2">
         <div className="row">
@@ -301,6 +238,88 @@ const Home = () => {
           <SpecialProduct />
         </div>
       </Container> */}
+
+<Container class1="home-wrapper-1 py-4">
+        
+        <div className="row">
+          <div className="col-6">
+            <div className="main-banner position-relative ">
+              <img
+                src="images/back.jpg"
+                className="img-fluid rounded-3"
+                alt="main banner"
+              />
+              <div className="main-banner-content position-absolute">
+                <h4>introducing.</h4>
+                <h5>iphone 14</h5>
+                <p>From Rs.325000</p>
+                <Link className="button-main-banner">BUY NOW</Link>
+              </div>
+            </div>
+          </div>
+          <div className="col-6">
+            <div className="d-flex flex-wrap gap-10 justify-content-between align-items-center">
+              <div className="small-banner position-relative">
+                <img
+                  src="images/catbanner-01.jpg"
+                  className="img-fluid rounded-3"
+                  alt="main banner"
+                />
+                <div className="small-banner-content position-absolute">
+                  <h4>Best Sake</h4>
+                  <h5>JBL</h5>
+                  <p>
+                  From RS.35000<br />
+                  </p>
+                </div>
+              </div>
+              <div className="small-banner position-relative">
+                <img
+                  src="images/catbanner-02.jpg"
+                  className="img-fluid rounded-3"
+                  alt="main banner"
+                />
+                <div className="small-banner-content position-absolute">
+                  <h4>NEW ARRIVAL</h4>
+                  <h5>I Watch</h5>
+                  <p>
+                    From Rs.20000 <br /> 
+                  </p>
+                </div>
+              </div>
+              <div className="small-banner position-relative ">
+                <img
+                  src="images/catbanner-03.jpg"
+                  className="img-fluid rounded-3"
+                  alt="main banner"
+                />
+                <div className="small-banner-content position-absolute">
+                  <h4>NEW ARRIVAL</h4>
+                  <h5>Air Pods</h5>
+                  <p>
+                    From RS.40000 <br /> 
+                  </p>
+                </div>
+              </div>
+              <div className="small-banner position-relative ">
+                <img
+                  src="images/catbanner-04.jpg"
+                  className="img-fluid rounded-3"
+                  alt="main banner"
+                />
+                <div className="small-banner-content position-absolute">
+                  <h4>NEW ARRIVAL</h4>
+                  <h5>Air Pods Max</h5>
+                  <p>
+                    From Rs.75000 <br /> 
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
+
       <Container class1="popular-wrapper py-5 home-wrapper-2">
         <div className="row">
           <div className="col-12">

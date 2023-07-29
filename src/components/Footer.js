@@ -74,24 +74,24 @@ const Footer = () => {
                 <Link to="/term-conditions" className="text-white py-2 mb-1">
                   Terms & Conditions
                 </Link>
-                <Link className="text-white py-1 mb-1">Blogs</Link>
+                <Link to="/blogs" className="text-white py-1 mb-1">Blogs</Link>
               </div>
             </div>
             <div className="col-3">
               <h4 className="text-white mb-2">Account</h4>
               <div className="footer-link d-flex flex-column">
-                <Link className="text-white py-1 mb-1" href="#" >About Us</Link>
-                <Link className="text-white py-1 mb-1" href="#">Faq</Link>
-                <Link className="text-white py-1 mb-1" href="#">Contact</Link>
+                {/* <Link className="text-white py-1 mb-1" href="#" >About Us</Link> */}
+                <Link className="text-white py-1 mb-1" to="/faq">Faq</Link>
+                <Link className="text-white py-1 mb-1" to="/contact">Contact</Link>
               </div>
             </div>
             <div className="col-2">
               <h4 className="text-white mb-2">Quick Links</h4>
               <div className="footer-link d-flex flex-column">
-                <Link className="text-white py-1 mb-1" href="#">Laptops</Link>
-                <Link className="text-white py-1 mb-1" href="#">Headphones</Link>
-                <Link className="text-white py-1 mb-1" href="#">Tablets</Link>
-                <Link className="text-white py-1 mb-1" href="#">Watch</Link>
+                <Link className="text-white py-1 mb-1"  to="">Laptops</Link>
+                <Link className="text-white py-1 mb-1"  to="">Headphones</Link>
+                <Link className="text-white py-1 mb-1"  to="">Tablets</Link>
+                <Link className="text-white py-1 mb-1"  to="">Watch</Link>
               </div>
             </div>
           </div>

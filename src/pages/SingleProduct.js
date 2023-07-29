@@ -9,15 +9,16 @@ import { TbGitCompare } from "react-icons/tb";
 import { AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import watch from "../images/watch.jpg";
+import watch2 from "../images/watch1.jpg";
 import Container from "../components/Container";
 const SingleProduct = () => {
-  const props = {
-    width: 594,
-    height: 600,
-    zoomWidth: 600,
+  // const props = {
+  //   width: 594,
+  //   height: 600,
+  //   zoomWidth: 600,
 
-    img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg",
-  };
+  //   img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg",
+  // };
 
   const [orderedProduct, setorderedProduct] = useState(true);
   const copyToClipboard = (text) => {
@@ -39,37 +40,22 @@ const SingleProduct = () => {
           <div className="col-6">
             <div className="main-product-image">
               <div>
-                <ReactImageZoom {...props} />
+                {/* <ReactImageZoom {...props} /> */}
+                <img src={watch} className="img-fluid" alt="product image" />
               </div>
             </div>
             <div className="other-product-images d-flex flex-wrap gap-15">
               <div>
-                <img
-                  src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
-                  className="img-fluid"
-                  alt=""
-                />
+              <img src={watch2} className="img-fluid" alt="product image" />
               </div>
               <div>
-                <img
-                  src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
-                  className="img-fluid"
-                  alt=""
-                />
+              <img src={watch} className="img-fluid" alt="product image" />
               </div>
               <div>
-                <img
-                  src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
-                  className="img-fluid"
-                  alt=""
-                />
+              <img src={watch} className="img-fluid" alt="product image" />
               </div>
               <div>
-                <img
-                  src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
-                  className="img-fluid"
-                  alt=""
-                />
+              <img src={watch2} className="img-fluid" alt="product image" />
               </div>
             </div>
           </div>
@@ -77,11 +63,11 @@ const SingleProduct = () => {
             <div className="main-product-details">
               <div className="border-bottom">
                 <h3 className="title">
-                  Kids Headphones Bulk 10 Pack Multi Colored For Students
+                The Haylou RS4 Plus with a 368*448 Pixel’s unprecedented visual clarity.
                 </h3>
               </div>
               <div className="border-bottom py-3">
-                <p className="price">$ 100</p>
+                <p className="price">Rs.15000</p>
                 <div className="d-flex align-items-center gap-10">
                   <ReactStars
                     count={5}
@@ -103,7 +89,7 @@ const SingleProduct = () => {
                 </div>
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Brand :</h3>
-                  <p className="product-data">Havells</p>
+                  <p className="product-data">Haylou</p>
                 </div>
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Category :</h3>
@@ -178,12 +164,12 @@ const SingleProduct = () => {
                 <div className="d-flex gap-10 flex-column  my-3">
                   <h3 className="product-heading">Shipping & Returns :</h3>
                   <p className="product-data">
-                    Free shipping and returns available on all orders! <br /> We
-                    ship all US domestic orders within
-                    <b>5-10 business days!</b>
+                     Returns available on all orders! <br /> We
+                    ship all orders within
+                    <b>3-5 business days!</b>
                   </p>
                 </div>
-                <div className="d-flex gap-10 align-items-center my-3">
+                {/* <div className="d-flex gap-10 align-items-center my-3">
                   <h3 className="product-heading">Product Link:</h3>
                   <a
                     href="javascript:void(0);"
@@ -195,7 +181,7 @@ const SingleProduct = () => {
                   >
                     Copy Product Link
                   </a>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -207,10 +193,7 @@ const SingleProduct = () => {
             <h4>Description</h4>
             <div className="bg-white p-3">
               <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Tenetur nisi similique illum aut perferendis voluptas, quisquam
-                obcaecati qui nobis officia. Voluptatibus in harum deleniti
-                labore maxime officia esse eos? Repellat?
+              The Haylou RS4 Plus with a 368*448 Pixel’s unprecedented visual clarity, the large 1.78-inch screen provides a precise and clear experience anytime, anywhere. The 60Hz refresh rate continues to optimize the user experience, which is rarely for round smartwatches that can be currently available.
               </p>
             </div>
           </div>
@@ -273,7 +256,7 @@ const SingleProduct = () => {
               <div className="reviews mt-4">
                 <div className="review">
                   <div className="d-flex gap-10 align-items-center">
-                    <h6 className="mb-0">Navdeep</h6>
+                    <h6 className="mb-0">Gihan</h6>
                     <ReactStars
                       count={5}
                       size={24}
@@ -283,11 +266,12 @@ const SingleProduct = () => {
                     />
                   </div>
                   <p className="mt-3">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Consectetur fugit ut excepturi quos. Id reprehenderit
-                    voluptatem placeat consequatur suscipit ex. Accusamus dolore
-                    quisquam deserunt voluptate, sit magni perspiciatis quas
-                    iste?
+                  Overall: Good quality . Great Value for money product. fast Shipping too. Recommended.
+                 <br></br>
+                  Detailed review: 
+                  Packaging: Well packed by the seller, no any damages to the product box or the product.
+                  <br></br>
+                  Price: This product is well worth the price. 
                   </p>
                 </div>
               </div>
@@ -332,9 +316,9 @@ const SingleProduct = () => {
                 </div>
                 <div className="d-flex flex-column flex-grow-1 w-50">
                   <h6 className="mb-3">Apple Watch</h6>
-                  <p className="mb-1">Quantity: asgfd</p>
-                  <p className="mb-1">Color: asgfd</p>
-                  <p className="mb-1">Size: asgfd</p>
+                  <p className="mb-1">Quantity: 1</p>
+                  <p className="mb-1">Color: red</p>
+                  <p className="mb-1">Size: XL</p>
                 </div>
               </div>
             </div>
