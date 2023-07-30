@@ -37,10 +37,10 @@ const Addcolor = () => {
   }, [getColorId]);
   useEffect(() => {
     if (isSuccess && createdColor) {
-      toast.success("Color Added Successfullly!");
+      toast.success("Color Added Successfully!");
     }
     if (isSuccess && updatedColor) {
-      toast.success("Color Updated Successfullly!");
+      toast.success("Color Updated Successfully!");
       navigate("/admin/list-color");
     }
     if (isError) {
