@@ -24,9 +24,9 @@ const data1 = [];
 for (let i = 0; i < 46; i++) {
   data1.push({
     key: i,
-    name: `Edwaard King ${i}`,
+    name: `Edwrd King ${i}`,
     product: 32,
-    staus: `London, Park Lane no. ${i}`,
+    staus: `Londonn, Park Lane no. ${i}`,
   });
 }
 const Dashboard = () => {
