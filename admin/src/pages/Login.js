@@ -9,7 +9,7 @@ import { login } from "../features/auth/authSlice";
 let schema = yup.object().shape({
   email: yup
     .string()
-    .email("Email shouldd be valid")
+    .email("Email should be valid")
     .required("Email is Required"),
   password: yup.string().required("Password is Required"),
 });
