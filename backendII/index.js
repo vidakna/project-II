@@ -44,7 +44,7 @@ app.use(notFound);
 app.use(errorHandler);
 
 app.use("/", (req, res) => {
-    res.send("Hello from server side");
+    res.send("Hello from server sidee");
 });
 
 app.listen(PORT, () => {
