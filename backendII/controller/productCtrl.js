@@ -240,4 +240,4 @@ const deleteImages = asyncHandler(async(req, res) => {
         throw new Error(error);
     }
 });
-module.exports = { createProduct, getaProduct, getAllProduct, updateProduct, deleteProduct, addToWishlist, rating, uploadImages, deleteImages };
+module.exports = { createProduct, getaProduct, getAllProduct, updateProduct, deleteProduct, addToWishlist, rating};

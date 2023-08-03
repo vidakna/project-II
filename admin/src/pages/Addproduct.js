@@ -231,7 +231,7 @@ const Addproduct = () => {
                   <div {...getRootProps()}>
                     <input {...getInputProps()} />
                     <p>
-                      Drag 'n' drop some files here, or click to select files
+                      Drag & drop product image here, or click to select image
                     </p>
                   </div>
                 </section>
