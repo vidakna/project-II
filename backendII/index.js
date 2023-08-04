@@ -44,7 +44,7 @@ app.use(notFound);
 app.use(errorHandler);
 
 app.use("/", (req, res) => {
-    res.send("Hello from server sidee");
+    res.send("Hello from server side");
 });
 
 app.listen(PORT, () => {
@@ -73,9 +73,3 @@ app.listen(PORT, () => {
 //     console.log('Server is running  at PORT ${PORT}');
 // });
 
-app.use("/", (req, res) => {
-    res.send("Hello  qq from server side");
-});
-app.listen(PORT, () => {
-    console.log('Server is running  at PORT ${PORT}');
-});
