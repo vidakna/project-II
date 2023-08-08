@@ -115,7 +115,7 @@ const Addblog = () => {
           <div className="mt-4">
             <CustomInput
               type="text"
-              label="Enter Blog Title"
+              label="Ente Blog Title"
               name="title"
               onChng={formik.handleChange("title")}
               onBlr={formik.handleBlur("title")}
