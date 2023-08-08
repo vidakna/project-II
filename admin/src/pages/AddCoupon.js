@@ -126,6 +126,7 @@ const AddCoupon = () => {
           <div className="error">
             {formik.touched.discount && formik.errors.discount}
           </div>
+         
           <button
             className="btn btn-success border-0 rounded-3 my-5"
             type="submit"
