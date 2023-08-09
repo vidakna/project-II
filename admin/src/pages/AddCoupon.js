@@ -96,7 +96,7 @@ const AddCoupon = () => {
             onChng={formik.handleChange("name")}
             onBlr={formik.handleBlur("name")}
             val={formik.values.name}
-            label="Enter Couponnnnn Name"
+            label="Enter Coupon Name"
             id="name"
           />
           <div className="error">

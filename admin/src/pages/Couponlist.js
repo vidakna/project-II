@@ -60,12 +60,12 @@ const Couponlist = () => {
       expiry: new Date(couponState[i].expiry).toLocaleString(),
       action: (
         <>
-          <Link
+          {/* <Link
             to={`/admin/coupon/${couponState[i]._id}`}
             className=" fs-3 text-danger"
           >
             <BiEdit />
-          </Link>
+          </Link> */}
           <button
             className="ms-3 fs-3 text-danger bg-transparent border-0"
             onClick={() => showModal(couponState[i]._id)}

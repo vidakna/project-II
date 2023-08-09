@@ -270,9 +270,12 @@ export const couponSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.couponName = action.payload.name;
-        state.couponExpiry = action.payload.expiry;
-        state.couponDiscount = action.payload.discount;
+        // state.couponName = action.payload.name;
+        // state.couponExpiry = action.payload.expiry;
+        // state.couponDiscount = action.payload.discount;
+        state.couponName = action.payload[0].name;
+        state.couponDiscount = action.payload[0].discount;
+        state.couponExpiry = action.payload[0].expiry;
         state.message = action.error;
       })
       .addCase(getACoupon.rejected, (state, action) => {
