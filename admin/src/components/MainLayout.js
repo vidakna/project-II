@@ -123,7 +123,7 @@ const MainLayout = () => {
             {
               key: "marketing",
               icon: <ImTicket className="fs-4" />,
-              label: "Coupans",
+              label: "Coupons",
               children: [
                 {
                   key: "coupon",
@@ -201,32 +201,32 @@ const MainLayout = () => {
             </div>
             
             <div className="d-flex gap-3 align-items-center dropdown">
-              <div>
+              {/* <div>
                 <img
                   width={32}
                   height={32}
                   src="https://previews.123rf.com/images/vgstudio/vgstudio1811/vgstudio181100109/111689921-portrait-of-happy-smiling-man-standing-in-crossed-arms-pose-over-yellow-background-caucasian-male.jpg"
                   alt=""
                 />
-              </div>
+              </div> */}
               <div
                 role="button"
                 id="dropdownMenuLink"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                <h5 className="mb-0">Shimalka Yohan</h5>
-                <p className="mb-0">shimalkawick@gmail.com</p>
+                {/* <h5 className="mb-0">Shimalka Yohan</h5>
+                <p className="mb-0">shimalkawick@gmail.com</p> */}
               </div>
               <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li>
-                  <Link
+                  {/* <Link
                     className="dropdown-item py-1 mb-1"
                     style={{ height: "auto", lineHeight: "20px" }}
                     to="/"
                   >
                     View Profile
-                  </Link>
+                  </Link> */}
                 </li>
                 <li>
                   <Link
