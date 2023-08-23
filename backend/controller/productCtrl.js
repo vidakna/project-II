@@ -135,28 +135,29 @@ const addToWishlist = asyncHandler(async(req, res) => {
     const { prodId } = req.body;
     try {
         const user = await User.findById(_id);
-        const alreadyadded = user.wishlist.find((id) => id.toString() === prodId);
-        if (alreadyadded) {
-            let user = await User.findByIdAndUpdate(
-                _id, {
-                    $pull: { wishlist: prodId },
-                }, {
-                    new: true,
-                }
-            );
-            res.json(user);
-        } else {
-            let user = await User.findByIdAndUpdate(
-                _id, {
-                    $push: { wishlist: prodId },
-                }, {
-                    new: true,
-                }
-            );
-            res.json(user);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found.' });
         }
+
+        const alreadyAdded = user.wishlist.some(wishlistItem => wishlistItem.equals(prodId));
+        let updatedUser;
+        if (alreadyAdded) {
+            updatedUser = await User.findByIdAndUpdate(
+                _id,
+                { $pull: { wishlist: prodId } },
+                { new: true }
+            );
+        } else {
+            updatedUser = await User.findByIdAndUpdate(
+                _id,
+                { $push: { wishlist: prodId } },
+                { new: true }
+            );
+        }
+        res.json(updatedUser);
     } catch (error) {
-        throw new Error(error);
+        console.error(error);
+        res.status(500).json({ message: 'An error occurred.' });
     }
 });
 const rating = asyncHandler(async(req, res) => {
