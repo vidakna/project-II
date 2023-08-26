@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import { Table } from "antd";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../features/product/productSlice";
 import { Link } from "react-router-dom";
+import productService from "../features/product/productService";
 const columns = [
   {
     title: "SNo",
@@ -42,11 +43,26 @@ const columns = [
 
 const Productlist = () => {
   const dispatch = useDispatch();
+  const[loadData , setLoadData] = useState(true);
   useEffect(() => {
-    dispatch(getProducts());
-  }, []);
+    if(loadData) {
+      dispatch(getProducts());
+      setLoadData(false)
+    }
+  }, [loadData]);
+
   const productState = useSelector((state) => state.product.products);
   const data1 = [];
+
+
+  const handleDelete = async (productId) => {
+    console.log(productId)
+    productService.deleteProduct(productId).then(()=>{
+      setLoadData(true)
+    })
+
+  };
+
   for (let i = 0; i < productState.length; i++) {
     data1.push({
       key: i + 1,
@@ -60,9 +76,12 @@ const Productlist = () => {
           <Link to="/" className=" fs-3 text-danger">
             <BiEdit />
           </Link>
-          <Link className="ms-3 fs-3 text-danger" to="/">
+          <button
+              className="ms-3 fs-3 text-danger"
+              onClick={() => handleDelete(productState[i]._id)}
+          >
             <AiFillDelete />
-          </Link>
+          </button>
         </>
       ),
     });
