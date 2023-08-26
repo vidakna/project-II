@@ -4,7 +4,7 @@ import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../features/product/productSlice";
-import { Link } from "react-router-dom";
+import { Link , useParams } from "react-router-dom";
 import productService from "../features/product/productService";
 const columns = [
   {
@@ -42,6 +42,7 @@ const columns = [
 ];
 
 const Productlist = () => {
+  let { id } = useParams();
   const dispatch = useDispatch();
   const[loadData , setLoadData] = useState(true);
   useEffect(() => {
@@ -64,6 +65,7 @@ const Productlist = () => {
   };
 
   for (let i = 0; i < productState.length; i++) {
+    id = productState[i]._id;
     data1.push({
       key: i + 1,
       title: productState[i].title,
@@ -73,7 +75,7 @@ const Productlist = () => {
       price: `${productState[i].price}`,
       action: (
         <>
-          <Link to="/" className=" fs-3 text-danger">
+          <Link to={`../product/update/${productState[i]._id}`} className=" fs-3 text-danger">
             <BiEdit />
           </Link>
           <button
