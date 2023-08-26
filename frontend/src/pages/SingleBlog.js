@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import { Link, useLocation } from "react-router-dom";
 import BreadCrumb from "../components/BreadCrumb";
 import { HiOutlineArrowLeft } from "react-icons/hi";
@@ -6,16 +6,30 @@ import Meta from "../components/Meta";
 import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { getABlog } from "../features/blogs/blogSlice";
+import {blogService} from "../features/blogs/blogService";
 
 const SingleBlog = () => {
-  const blogState = useSelector((state) => state.blog.blog);
+  const [blogState, setBlogState] = useState(null)
   const location = useLocation();
   const getBlogId = location.pathname.split("/")[2];
   const dispatch = useDispatch();
+  const [loading , setLoading] = useState(true)
 
-  useEffect(() => {
-    dispatch(getABlog(getBlogId));
-  }, [dispatch, getBlogId]);
+  // useEffect(() => {
+  //   console.log(getBlogId)
+  //   dispatch(getABlog(getBlogId));
+  // }, [dispatch, getBlogId]);
+
+  useEffect(()=>{
+    blogService.getBlog(getBlogId).then((res)=>{
+      setBlogState(res)
+      setLoading(false)
+    })
+  })
+
+  if (loading) {
+    return <div className="text-center fs-3">No Data</div>;
+  }
 
   return (
     <>
@@ -30,9 +44,9 @@ const SingleBlog = () => {
               </Link>
               
               <h3 className="title">{blogState?.title}</h3>
-              {blogState?.imageURL && (
+              {blogState?.image && (
                 <img
-                  src={blogState.imageURL} // Use the imageURL from the Redux store
+                  src={blogState.image} // Use the imageURL from the Redux store
                   className="img-fluid w-50 my-4"
                   alt="blog"
                 />
