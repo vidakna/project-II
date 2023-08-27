@@ -13,13 +13,34 @@ import watch2 from "../images/watch1.jpg";
 import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { getAProduct } from "../features/products/productSlice";
+
+import { Canvas } from "@react-three/fiber";
+import { useGLTF, Stage, PresentationControls } from "@react-three/drei";
+
 const SingleProduct = () => {
   const location=useLocation();
   console.log(location);
   const getProductId=location.pathname.split("/")[2]
   const dispatch=useDispatch();
   const productState=useSelector(state=>state.product.product)
-  console.log(productState);
+
+
+  let sourceData = ""
+
+  function getFileExtension(url) {
+    const segments = url.split('/');
+    const filename = segments[segments.length - 1];
+    const extension = filename.split('.').pop();
+    return extension;
+  }
+
+  for (let i = 0; i < productState.images?.length; i++) {
+    if (getFileExtension(productState.images?.at(i).url) === "glb"){
+      sourceData = productState.images?.at(i).url
+    }
+  }
+
+
   useEffect(()=>{
     dispatch(getAProduct(getProductId))
   },[])
@@ -42,6 +63,28 @@ const SingleProduct = () => {
     textField.remove();
   };
   const closeModal = () => {};
+
+
+
+  // function Model(props) {
+  //     // const {scene} = useGLTF("/bmw.glb");
+  //     const {scene} = useGLTF(sourceData);
+  //     return <primitive object={scene} {...props} />;
+  // }
+
+  function Model(props) {
+    // Always call the hook
+    const { scene } = useGLTF(sourceData);
+
+    // Use a conditional rendering approach
+    if (sourceData !== null) {
+      return <primitive object={scene} {...props} />;
+    }
+
+    // Return null or a placeholder component if sourceData is null
+    return null; // or <p>Loading...</p> or any other fallback
+  }
+
   return (
     <>
       <Meta title={"Product Name"} />
@@ -51,13 +94,39 @@ const SingleProduct = () => {
           <div className="col-6">
             <div className="main-product-image">
               <div>
-              {productState?.images?.map((item, index) => { // Add ?. after images
-                  return (
-                    <div key={index}> {/* Add key */}
-                      <img src={item?.url} className="img-fluid" alt="product image" />
+
+                {sourceData !== "" ? (
+                    <Canvas
+                        dpr={[1, 2]}
+                        shadows
+                        camera={{ fov: 45 }}
+                        style={{ height: "30vh" }}
+                    >
+                      <color attach="background" args={["#101010"]} />
+                      <PresentationControls
+                          speed={1.5}
+                          global
+                          zoom={0.5}
+                          polar={[-0.1, Math.PI / 4]}
+                      >
+                        <Stage environment={"sunset"}>
+                          <Model scale={0.01} />
+                        </Stage>
+                      </PresentationControls>
+                    </Canvas>
+                ) :
+
+                    <div>
+                      {productState?.images?.map((item, index) => { // Add ?. after images
+                        return (
+                            <div key={index}> {/* Add key */}
+                              <img src={item?.url} className="img-fluid" alt="product image" />
+                            </div>
+                        );
+                      })}
                     </div>
-                  );
-                })}
+                }
+
                 </div>
             </div>
             <div className="other-product-images d-flex flex-wrap gap-15">
