@@ -89,7 +89,7 @@
 
 // export default ProductCard;
 
-import React from "react";
+import React, {useEffect} from "react";
 import ReactStars from "react-rating-stars-component";
 import { Link, useLocation } from "react-router-dom";
 import prodcompare from "../images/prodcompare.svg";
@@ -102,7 +102,16 @@ import { addToWishlist } from "../features/products/productSlice";
 
 const ProductCard = (props) => {
   const { grid, data } = props;
-  
+
+
+  const removeOver = () =>{
+    const modalBackdrop = document.querySelector(".modal-backdrop.show");
+    if (modalBackdrop !== null) {
+      modalBackdrop.classList.remove("show");
+      modalBackdrop.classList.add("d-none")
+    }
+  }
+
   console.log(data);
   let location = useLocation();
   const dispatch = useDispatch();
@@ -174,7 +183,7 @@ const ProductCard = (props) => {
                   <button className="border-0 bg-transparent">
                     <img src={prodcompare} alt="compare" />
                   </button>
-                  <Link to={'/product/'+item?._id} className="border-0 bg-transparent">
+                  <Link to={'/product/'+item?._id} className="border-0 bg-transparent event" onClick={removeOver}>
                     <img src={view} alt="view" />
                   </Link>
                   <button className="border-0 bg-transparent">

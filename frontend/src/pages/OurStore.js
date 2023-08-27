@@ -7,6 +7,7 @@ import Color from "../components/Color";
 import Container from "../components/Container";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../features/products/productSlice";
+import FilterModal from "../components/FilterModal";
 
 const OurStore = () => {
   const [grid, setGrid] = useState(4);
@@ -19,13 +20,25 @@ const OurStore = () => {
   const getProducts =() =>{
     dispatch(getAllProducts());
   };
+
+
   return (
     <>
       <Meta title={"Our Store"} />
       <BreadCrumb title="Our Store" />
       <Container class1="store-wrapper home-wrapper-2 py-5">
+        asdasd
         <div className="row">
           <div className="col-3">
+            <div className="filter-card mb-3">
+              <h3 className="filter-title">Filter as you wish</h3>
+              <div>
+                  {/*<button className="btn btn-sm btn-warning" onClick={handleShow}>*/}
+                  {/*        filter*/}
+                  {/*</button>*/}
+                <FilterModal></FilterModal>
+              </div>
+            </div>
             <div className="filter-card mb-3">
               <h3 className="filter-title">Shop By Categories</h3>
               <div>
@@ -263,6 +276,7 @@ const OurStore = () => {
           </div>
         </div>
       </Container>
+
     </>
   );
 };

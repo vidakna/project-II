@@ -241,4 +241,34 @@ const deleteImages = asyncHandler(async(req, res) => {
         throw new Error(error);
     }
 });
-module.exports = { createProduct, getaProduct, getAllProduct, updateProduct, deleteProduct, addToWishlist, rating};
+
+const filterProducts = asyncHandler(async(req, res) => {
+    try {
+        const { productKind, favBrand, color, startPrice, endPrice } = req.body;
+
+        const filters = {};
+
+        if (productKind) {
+            filters.category = productKind;
+        }
+
+        if (favBrand) {
+            filters.brand = favBrand;
+        }
+
+        // if (color) {
+        //     filters.color = color;
+        // }
+
+        if (startPrice && endPrice) {
+            filters.price = { $gte: parseInt(startPrice), $lte: parseInt(endPrice) };
+        }
+
+        const products = await Product.find(filters);
+
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+module.exports = { createProduct, getaProduct, getAllProduct, updateProduct, deleteProduct, addToWishlist, rating , filterProducts};
