@@ -38,7 +38,7 @@ const Login = () => {
     }
   }, [user, isError, isSuccess, isLoading]);
   return (
-    <div className="py-5" style={{ background: "#ffd333", minHeight: "100vh" }}>
+    <div className="py-5" style={{ background: "#00434e", minHeight: "100vh" }}>
       <br />
       <br />
       <br />

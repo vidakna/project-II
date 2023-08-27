@@ -122,7 +122,8 @@ const Dashboard = () => {
             <h6>
               <BsArrowDownRight /> 32%
             </h6>
-            <p className="mb-0  desc">Compared To April 2022</p>
+            <p className="mb-0  desc">Compared To July 2023</p>
+
           </div>
         </div>
         <div className="d-flex justify-content-between align-items-end flex-grow-1 bg-white p-3 roudned-3">
@@ -134,7 +135,8 @@ const Dashboard = () => {
             <h6 className="red">
               <BsArrowDownRight /> 32%
             </h6>
-            <p className="mb-0  desc">Compared To April 2022</p>
+            <p className="mb-0  desc">Compared To August 2023</p>
+
           </div>
         </div>
         <div className="d-flex justify-content-between align-items-end flex-grow-1 bg-white p-3 roudned-3">
@@ -146,7 +148,8 @@ const Dashboard = () => {
             <h6 className="green">
               <BsArrowDownRight /> 32%
             </h6>
-            <p className="mb-0 desc">Compared To April 2022</p>
+              <p className="mb-0  desc">Compared To July 2023</p>
+
           </div>
         </div>
       </div>
