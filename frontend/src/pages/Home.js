@@ -188,7 +188,7 @@ const Home = () => {
           {productState &&
           productState?.map((item,index)=>{
             if (item.tags === "featured"){
-              const imageUrl = item?.images?.length > 0 ? item.images[0].url : "";
+              const imageUrl = item?.images?.length > 0 ? item.images[0]?.url : "";
               return(
                 <div
                 key={index}
@@ -209,7 +209,7 @@ const Home = () => {
                   <div className="product-image">
                     
                       <img
-                        src={item?.images[0].url}
+                        src={item?.images[0]?.url}
                         className="img-fluid mx-auto"
                         alt="product image"
                         width={300}
@@ -426,7 +426,7 @@ const Home = () => {
           {productState &&
           productState?.map((item,index)=>{
             if (item.tags === "popular"){
-              const imageUrl = item?.images?.length > 0 ? item.images[0].url : "";
+              const imageUrl = item?.images?.length > 0 ? item.images[0]?.url : "";
               return(
                 <div
                 key={index}
@@ -447,7 +447,7 @@ const Home = () => {
                   <div className="product-image">
                     
                       <img
-                        src={item?.images[0].url}
+                        src={item?.images[0]?.url}
                         className="img-fluid mx-auto"
                         alt="product image"
                         width={300}
