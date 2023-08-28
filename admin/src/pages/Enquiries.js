@@ -101,7 +101,10 @@ const Enquiries = () => {
   }
   const setEnquiryStatus = (e, i) => {
     console.log(e, i);
-    const data = { id: i, enqData: e };
+    const data = {
+      id: i.toString(),
+      enqData: e.toString()
+    };
     dispatch(updateAEnquiry(data));
   };
   const deleteEnq = (e) => {
