@@ -1,11 +1,57 @@
-import React from "react";
+import React, {useState} from "react";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import { AiOutlineHome, AiOutlineMail } from "react-icons/ai";
 import { BiPhoneCall, BiInfoCircle } from "react-icons/bi";
 import Container from "../components/Container";
+import axios from "axios";
+import {base_url} from "../utills/axiosConfig";
 
 const Contact = () => {
+
+  const [name , setName] = useState("");
+  const [email , setEmail] = useState("");
+  const [mobile , setMobile] = useState("");
+  const [comment , setComment] = useState("");
+
+  const nameHandler = (event) =>{
+      setName(event.target.value)
+  }
+
+  const emailHandler = (event) =>{
+    setEmail(event.target.value)
+  }
+
+  const mobileHandler = (event) =>{
+    setMobile(event.target.value)
+  }
+
+  const commentHandler = (event) =>{
+    setComment(event.target.value)
+  }
+
+  const formHandler = (event) =>{
+    event.preventDefault();
+
+    const data = {
+      name : name,
+      email : email,
+      mobile : mobile,
+      comment : comment
+    }
+
+    axios.post(`${base_url}enquiry` , data).then((res) =>{
+      alert("Your enquiries submitted")
+      setName("")
+      setEmail("")
+      setMobile("")
+      setComment("")
+    }).catch((error) =>{
+      console.error(error)
+    })
+
+  }
+
   return (
     <>
       <Meta title={"Contact Us"} />
@@ -19,12 +65,15 @@ const Contact = () => {
             <div className="contact-inner-wrapper d-flex justify-content-between ">
               <div>
                 <h3 className="contact-title mb-4">Contact</h3>
-                <form action="" className="d-flex flex-column gap-15">
+                <form action="" className="d-flex flex-column gap-15" onSubmit={formHandler}>
                   <div>
                     <input
                       type="text"
                       className="form-control"
                       placeholder="Name"
+                      value={name}
+                      required="true"
+                      onChange={nameHandler}
                     />
                   </div>
                   <div>
@@ -32,6 +81,9 @@ const Contact = () => {
                       type="email"
                       className="form-control"
                       placeholder="Email"
+                      required="true"
+                      value={email}
+                      onChange={emailHandler}
                     />
                   </div>
                   <div>
@@ -39,6 +91,9 @@ const Contact = () => {
                       type="tel"
                       className="form-control"
                       placeholder="Mobile Number"
+                      required="true"
+                      value={mobile}
+                      onChange={mobileHandler}
                     />
                   </div>
                   <div>
@@ -49,6 +104,9 @@ const Contact = () => {
                       cols="30"
                       rows="4"
                       placeholder="Comments"
+                      required="true"
+                      value={comment}
+                      onChange={commentHandler}
                     ></textarea>
                   </div>
                   <div>
