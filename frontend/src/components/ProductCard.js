@@ -103,6 +103,14 @@ import { addToWishlist } from "../features/products/productSlice";
 const ProductCard = (props) => {
   const { grid, data } = props;
 
+  const saveIdToLocal = (item) =>{
+    console.log(item)
+    if(localStorage.getItem("item1") == null){
+      localStorage.setItem("item1" ,  JSON.stringify(item))
+    }else if(localStorage.getItem("item2") == null){
+      localStorage.setItem("item2" , JSON.stringify(item))
+    }
+  }
 
   const removeOver = () =>{
     const modalBackdrop = document.querySelector(".modal-backdrop.show");
@@ -180,7 +188,7 @@ const ProductCard = (props) => {
               </div>
               <div className="action-bar position-absolute">
                 <div className="d-flex flex-column gap-15">
-                  <button className="border-0 bg-transparent">
+                  <button className="border-0 bg-transparent" onClick={() => saveIdToLocal(item)}>
                     <img src={prodcompare} alt="compare" />
                   </button>
                   <Link to={'/product/'+item?._id} className="border-0 bg-transparent event" onClick={removeOver}>
