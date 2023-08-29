@@ -12,12 +12,52 @@ const { generateRefreshToken } = require("../config/refreshToken");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const sendEmail = require("./emailCtrl");
+const { v4: uuidv4 } = require('uuid');
+
+
+const nodemailer = require('nodemailer');
+
+
+const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: process.env.MAIL_ID, // Use your environment variable for email
+        pass: process.env.MP, // Use your environment variable for password
+    },
+});
+
+const createUUID = () =>{
+    const uuid = uuidv4();
+    return uuid;
+}
+
+
 const createUser = asyncHandler(async(req, res) => {
     const email = req.body.email;
+    req.body.uuid = createUUID();
+    req.body.active = false;
     const findUser = await User.findOne({ email: email });
     if (!findUser) {
         //create a new user
         const newUser = await User.create(req.body);
+
+        const mailOptions = {
+            from: `${process.env.MAIL_ID}`, // Replace with your Gmail email
+            to: `${email}`,
+            subject: 'Verification Code',
+            text: `Your verification code is: http://localhost:5000/api/user/login/${req.body.uuid}`,
+        };
+
+
+        try {
+            const info = await transporter.sendMail(mailOptions);
+            console.log('Email sent:', info.response);
+            res.json({ message: 'Verification code sent to your email.' });
+        } catch (error) {
+            console.error('Email sending error:', error);
+            res.status(500).json({ error: 'An error occurred while sending the email.' });
+        }
+
         res.json(newUser);
     } else {
         throw new Error("User Already Exists");
@@ -27,7 +67,7 @@ const loginUserCtrl = asyncHandler(async(req, res) => {
     const { email, password } = req.body;
     //check if user exists or not 
     const findUser = await User.findOne({ email });
-    if (findUser && await findUser.isPasswordMatched(password)) {
+    if (findUser && findUser.active && await findUser.isPasswordMatched(password)) {
         const refreshToken = await generateRefreshToken(findUser._id);
         const updateuser = await User.findByIdAndUpdate(
             findUser.id, {
@@ -48,9 +88,25 @@ const loginUserCtrl = asyncHandler(async(req, res) => {
         });
 
     } else {
-        throw new Error("Invalid Credentials");
+        throw new Error("Invalid Credentials or You'r account not activated");
     }
 });
+
+const activeAccount = asyncHandler(async(req, res) => {
+    const { uuid } = req.params;
+    //check if user exists or not
+    const findUser = await User.findOneAndUpdate(
+        { uuid },
+        { $set: { active: true } }
+    );
+
+    if(findUser){
+        res.json({ message: 'You are active' });
+    }else{
+        throw new Error("Something went wring");
+    }
+});
+
 //admin Login
 // const loginAdmin = asyncHandler(async(req, res) => {
 //     const { email, password } = req.body;
@@ -580,4 +636,4 @@ const updateOrderStatus = asyncHandler(async(req, res) => {
     }
 });
 
-module.exports = { createUser, loginUserCtrl, getallUser, getaUser, deleteaUser, updatedUser, blockUser, unblockUser, handleRefreshToken, logout, updatePassword, forgotPasswordToken, resetPassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, updateOrderStatus,getAllOrders,getOrderByUserId };
+module.exports = { createUser, loginUserCtrl, getallUser, getaUser, deleteaUser, updatedUser, blockUser, unblockUser, handleRefreshToken, logout, updatePassword, forgotPasswordToken, resetPassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, updateOrderStatus,getAllOrders,getOrderByUserId ,activeAccount};

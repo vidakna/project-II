@@ -51,6 +51,13 @@ var userSchema = new mongoose.Schema({
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date,
+    active: {
+        type: Boolean,
+        default: false
+    },
+    uuid: {
+        type: String,
+    },
 }, {
     timestamps: true,
 });
