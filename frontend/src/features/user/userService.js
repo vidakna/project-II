@@ -28,8 +28,18 @@ const getUserWishlist = async () =>{
     }
 };
 
+const getOrders = async () =>{
+    const response = await axios.get(`${base_url}user/get-Orders`, config);
+
+    if(response.data){
+        return response.data;
+    }
+
+};
+
 export const authService={
     register,
     login,
     getUserWishlist,
+    getOrders
 };
