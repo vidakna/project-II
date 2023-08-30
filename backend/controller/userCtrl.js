@@ -602,6 +602,18 @@ const getAllOrders = asyncHandler(async(req, res) => {
         throw new Error(error);
     }
 });
+
+const deleteOrder = asyncHandler(async(req, res) => {
+
+    const { id } = req.params;
+    console.log(id)
+    try {
+        const deleted = await Order.findByIdAndDelete(id)
+        res.json(deleted);
+    } catch (error) {
+        throw new Error(error);
+    }
+});
 const getOrderByUserId = asyncHandler(async(req, res) => {
     
     
@@ -636,4 +648,4 @@ const updateOrderStatus = asyncHandler(async(req, res) => {
     }
 });
 
-module.exports = { createUser, loginUserCtrl, getallUser, getaUser, deleteaUser, updatedUser, blockUser, unblockUser, handleRefreshToken, logout, updatePassword, forgotPasswordToken, resetPassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, updateOrderStatus,getAllOrders,getOrderByUserId ,activeAccount};
+module.exports = { createUser, loginUserCtrl, getallUser, getaUser, deleteaUser, updatedUser, blockUser, unblockUser, handleRefreshToken, logout, updatePassword, forgotPasswordToken, resetPassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, updateOrderStatus,getAllOrders,getOrderByUserId ,activeAccount, deleteOrder};
