@@ -30,6 +30,10 @@ const columns = [
     title: "Date",
     dataIndex: "date",
   },
+  {
+    title: "Status",
+    dataIndex: "status",
+  },
 
   {
     title: "Action",
@@ -81,9 +85,10 @@ const Orders = () => {
       ),
       amount: orderState[i].paymentIntent.amount,
       date: new Date(orderState[i]?.createdAt).toLocaleString(),
+      status:orderState[i].orderStatus,
       action: (
         <>
-          <Link to="/" className=" fs-3 text-danger">
+          <Link to={`../order/${orderState[i]._id}`} className=" fs-3 text-danger">
             <BiEdit />
           </Link>
           <button style={{background : "none" , border : "none"}} onClick={() => deleteOrder(orderState[i]?._id)} className="ms-3 fs-3 text-danger" to="/">
