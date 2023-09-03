@@ -31,6 +31,8 @@ const Cart = () => {
     authService.getOrders().then((wi) => {
       setOrderHistory(wi);
       setLoading(false);
+    }).catch((e)=>{
+      console.log(e)
     });
   };
 
