@@ -3,7 +3,7 @@ import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import watch from "../images/watch.jpg";
 import { AiFillDelete } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Container from "../components/Container";
 import {authService} from "../features/user/userService";
 import {productService} from "../features/products/productService";
@@ -15,6 +15,14 @@ const Cart = () => {
 
   const [orderHistory , setOrderHistory] = useState([]);
   const [loading , setLoading] = useState(true)
+
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    if(localStorage.getItem("token") == null){
+      navigate('/login');
+    }
+  })
 
   useEffect(() => {
     // load orders

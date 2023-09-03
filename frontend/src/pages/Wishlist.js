@@ -4,6 +4,7 @@ import Meta from "../components/Meta";
 import Container from "../components/Container";
 import {createSelector} from 'reselect';
 import {useDispatch, useSelector} from "react-redux";
+import { useNavigate } from 'react-router-dom';
 // import { getUserCart, getWishlist } from "../../../backendII/controller/userCtrl";
 import {getUserProductWishlist} from "../features/user/userSlice";
 import {addToWishlist} from "../features/products/productSlice";
@@ -22,6 +23,13 @@ const Wishlist = () => {
     const [loading, setLoading] = useState(true)
     const [wishlistState , setWishlistState] = useState([])
     const [reload , setReload] = useState(false)
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        if(localStorage.getItem("token") == null){
+            navigate('/login');
+        }
+    })
 
     useEffect(() => {
         // getWishlistFromDb();
