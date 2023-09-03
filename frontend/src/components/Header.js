@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState , useRef } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import compare from "../images/compare.svg";
@@ -7,7 +7,50 @@ import user from "../images/user.svg";
 import cart from "../images/cart.svg";
 import menu from "../images/menu.svg";
 import logo from "../images/logo.png";
+import axios from "axios";
+import {base_url} from "../utills/axiosConfig";
+import view from "../images/view.svg";
 const Header = () => {
+
+  const [searchInput, setSearchInput] = useState('');
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const dropdownRef = useRef(null);
+
+
+  const [products , setproducts] = useState([]);
+
+
+  useEffect(()=>{
+    axios.get(`${base_url}product`).then((res) =>{
+      setproducts(res.data)
+    })
+  } , [])
+
+
+  // Function to filter products based on user input
+  const filterProducts = (input) => {
+    const filtered = products.filter((product) =>
+        product.title.toLowerCase().includes(input.toLowerCase())
+    );
+    if(input != "") {
+      setFilteredProducts(filtered);
+    }else{
+      setFilteredProducts([])
+    }
+  };
+
+  // Event handler for input changes
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
+    setSearchInput(inputValue);
+    filterProducts(inputValue);
+  };
+
+  const clearInput = () => {
+    searchInput("")
+  }
+
+
   return (
     <>
      
@@ -30,11 +73,25 @@ const Header = () => {
                   placeholder="Search Product Here..."
                   aria-label="Search Product Here..."
                   aria-describedby="basic-addon2"
+                  value={searchInput}
+                  onChange={handleInputChange}
                 />
                 <span className="input-group-text p-2" id="basic-addon2">
                   <BsSearch className="fs-6" />
                 </span>
               </div>
+              {filteredProducts.length > 0 && (
+                  <ul className="list-group mt-2" style={{ zIndex: 100 , position: 'absolute'}}>
+                    {filteredProducts.map((product) => (
+                        <li key={product.id} className="list-group-item">
+                          <Link to={'/product/'+product?._id} className="border-0 bg-transparent event" onClick={clearInput}>
+                            {product.title}
+                          </Link>
+                        </li>
+                    ))}
+                  </ul>
+              )}
+
             </div>
             <div className="col-5">
               <div className="header-upper-links d-flex align-items-center justify-content-between">
