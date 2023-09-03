@@ -1,5 +1,5 @@
 const express = require("express");
-const { createProduct, getaProduct, getAllProduct, updateProduct, deleteProduct, addToWishlist, rating , filterProducts } = require("../controller/productCtrl");
+const { createProduct, getaProduct, getAllProduct, updateProduct, deleteProduct, addToWishlist, rating , filterProducts, searchProduct } = require("../controller/productCtrl");
 
 const { isAdmin, authMiddleware } = require("../middlewares/authMiddleware");
 
@@ -14,4 +14,5 @@ router.put("/rating", authMiddleware, rating);
 router.put("/:id", authMiddleware, isAdmin, updateProduct);
 router.delete("/:id", authMiddleware, isAdmin, deleteProduct);
 router.get("/", getAllProduct);
+router.post("/search", searchProduct);
 module.exports = router;

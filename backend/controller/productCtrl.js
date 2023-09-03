@@ -75,6 +75,31 @@ const deleteProduct = asyncHandler(async(req, res, next) => {
     }
 });
 
+const searchProduct = asyncHandler(async(req, res, next) => {
+    try {
+        // Retrieve the "title" query parameter from the request
+        const { title } = req.body;
+
+        // Check if "title" parameter is provided
+        if (!title) {
+            return res.status(400).json({ error: 'Title parameter is required' });
+        }
+
+        // Build a regex pattern to match any part of the title (case-insensitive)
+        const regexPattern = new RegExp(title, 'i');
+
+        // Perform a case-insensitive search for products with a title containing the provided string
+        const products = await Product.find({
+            title: { $regex: regexPattern },
+        });
+
+        // Send the matching products as a response
+        res.json(products);
+    } catch (error) {
+        next(error); // Pass the error to the error-handling middleware
+    }
+});
+
 const getaProduct = asyncHandler(async(req, res) => {
     const { id } = req.params;
     try {
@@ -271,4 +296,4 @@ const filterProducts = asyncHandler(async(req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-module.exports = { createProduct, getaProduct, getAllProduct, updateProduct, deleteProduct, addToWishlist, rating , filterProducts};
+module.exports = { createProduct, getaProduct, getAllProduct, updateProduct, deleteProduct, addToWishlist, rating , filterProducts , searchProduct};
