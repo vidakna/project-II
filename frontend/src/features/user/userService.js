@@ -37,9 +37,19 @@ const getOrders = async () =>{
 
 };
 
+const getSingleUser= async (id) =>{
+    const response = await axios.get(`${base_url}user/single/${id}`, config);
+
+    if(response.data){
+        return response.data;
+    }
+
+};
+
 export const authService={
     register,
     login,
     getUserWishlist,
-    getOrders
+    getOrders,
+    getSingleUser
 };

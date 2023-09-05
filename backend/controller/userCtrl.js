@@ -341,6 +341,19 @@ const getaUser = asyncHandler(async(req, res) => {
     }
 });
 
+const getaUserUser = asyncHandler(async(req, res) => {
+    const { id } = req.params;
+    validateMongoDbId(id);
+    try {
+        const getaUser = await User.findById(id);
+        res.json({
+            getaUser,
+        });
+    } catch (error) {
+        throw new Error(error);
+    }
+});
+
 //Delete user
 
 const deleteaUser = asyncHandler(async(req, res) => {
@@ -662,4 +675,4 @@ const updateOrderStatus = asyncHandler(async(req, res) => {
     }
 });
 
-module.exports = { createUser, loginUserCtrl, getallUser, getaUser, deleteaUser, updatedUser, blockUser, unblockUser, handleRefreshToken, logout, updatePassword, forgotPasswordToken, resetPassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, updateOrderStatus,getAllOrders,getOrderByUserId ,activeAccount, deleteOrder , getOrderById};
+module.exports = { createUser, loginUserCtrl, getallUser, getaUser, deleteaUser, updatedUser, blockUser, unblockUser, handleRefreshToken, logout, updatePassword, forgotPasswordToken, resetPassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, updateOrderStatus,getAllOrders,getOrderByUserId ,activeAccount, deleteOrder , getOrderById , getaUserUser};

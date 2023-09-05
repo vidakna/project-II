@@ -16,6 +16,10 @@ import { getAProduct } from "../features/products/productSlice";
 
 import { Canvas } from "@react-three/fiber";
 import { useGLTF, Stage, PresentationControls } from "@react-three/drei";
+import axios from "axios";
+// import {base_url, config} from "../utills/axiosConfig";
+import {productService} from "../features/products/productService";
+import {authService} from "../features/user/userService";
 
 const SingleProduct = () => {
   const location=useLocation();
@@ -83,6 +87,42 @@ const SingleProduct = () => {
 
     // Return null or a placeholder component if sourceData is null
     return null; // or <p>Loading...</p> or any other fallback
+  }
+
+  const [ratings , setRatings] = useState(0)
+  const [comment , setComment] = useState("")
+
+  const handleComment = (event) =>{
+    setComment(event.target.value);
+    console.log(ratings)
+  }
+
+  const handleRatingChange = (newRating) => {
+    setRatings(newRating);
+  };
+
+  const a =  {
+    "star" : ratings,
+    "comment" : comment,
+    "prodId" : productState?._id
+  }
+
+  const handleSubmit = (event) =>{
+    event.preventDefault();
+    productService.ratingSave(a);
+    setRatings(0)
+    setComment("")
+  }
+
+  const getUser = (id) =>{
+    authService.getSingleUser(id).then((res) =>{
+      console.log(res.getaUser.firstname)
+      return res
+    }).catch((e)=>{
+      return  ""
+    })
+
+    return "User"
   }
 
   return (
@@ -317,9 +357,10 @@ const SingleProduct = () => {
                     <ReactStars
                       count={5}
                       size={24}
-                      value={4}
+                      value={ratings}
                       edit={true}
                       activeColor="#ffd700"
+                      onChange={handleRatingChange}
                     />
                   </div>
                   <div>
@@ -330,35 +371,39 @@ const SingleProduct = () => {
                       cols="30"
                       rows="4"
                       placeholder="Comments"
+                      value={comment}
+                      onChange={handleComment}
                     ></textarea>
                   </div>
                   <div className="d-flex justify-content-end">
-                    <button className="button border-0">Submit Review</button>
+                    <button onClick={handleSubmit} className="button border-0">Submit Review</button>
                   </div>
                 </form>
               </div>
-              <div className="reviews mt-4">
-                <div className="review">
-                  <div className="d-flex gap-10 align-items-center">
-                    <h6 className="mb-0">Gihan</h6>
-                    <ReactStars
-                      count={5}
-                      size={24}
-                      value={4}
-                      edit={false}
-                      activeColor="#ffd700"
-                    />
-                  </div>
-                  <p className="mt-3">
-                  Overall: Good quality . Great Value for money product. fast Shipping too. Recommended.
-                 <br></br>
-                  Detailed review: 
-                  Packaging: Well packed by the seller, no any damages to the product box or the product.
-                  <br></br>
-                  Price: This product is well worth the price. 
-                  </p>
-                </div>
-              </div>
+              {productState?.ratings?.map((obj)=>{
+                  return(
+                      <div className="reviews mt-4">
+                        <div className="review">
+                          <div className="d-flex gap-10 align-items-center">
+                            <h6 className="mb-0">{getUser(obj.postedby)}</h6>
+                            <ReactStars
+                                count={5}
+                                size={24}
+                                value={obj.star}
+                                edit={false}
+                                activeColor="#ffd700"
+                            />
+                          </div>
+                          <p className="mt-3">
+                            {obj.comment}
+                          </p>
+                        </div>
+                      </div>
+                  )
+              })}
+
+
+
             </div>
           </div>
         </div>
