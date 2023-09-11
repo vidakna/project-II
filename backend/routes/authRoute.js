@@ -1,5 +1,5 @@
 const express = require('express');
-const { createUser, loginUserCtrl, getallUser, getaUser, deleteaUser, updatedUser, blockUser, unblockUser, handleRefreshToken, logout, updatePassword, forgotPasswordToken, resetPassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, updateOrderStatus,getAllOrders ,activeAccount, deleteOrder,getOrderById } = require('../controller/userCtrl');
+const { createUser, loginUserCtrl, getallUser, getaUser, deleteaUser, updatedUser, blockUser, unblockUser, handleRefreshToken, logout, updatePassword, forgotPasswordToken, resetPassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, updateOrderStatus,getAllOrders ,activeAccount, deleteOrder,getOrderById , getMonthWiseOrder,getOrdersAll } = require('../controller/userCtrl');
 const { authMiddleware, isAdmin } = require("../middlewares/authMiddleware");
 
 const router = express.Router();
@@ -14,6 +14,8 @@ router.post("/login", loginUserCtrl);
 router.get("/login/:uuid", activeAccount);
 router.post("/admin-login", loginAdmin);
 router.post("/cart", authMiddleware, userCart);
+router.get("/getMonthWiseOrder", getMonthWiseOrder);
+router.get("/get-all-orders", getOrdersAll);
 router.post("/cart/applycoupon", authMiddleware, applyCoupon);
 router.post("/cart/cash-order", authMiddleware, createOrder);
 router.get("/get-orders", authMiddleware, getOrders);
@@ -35,5 +37,7 @@ router.put("/save-address", authMiddleware, saveAddress);
 router.put("/edit-user", authMiddleware, updatedUser);
 router.put("/block-user/:id", authMiddleware, isAdmin, blockUser);
 router.put("/unblock-user/:id", authMiddleware, isAdmin, unblockUser);
+
+
 
 module.exports = router;

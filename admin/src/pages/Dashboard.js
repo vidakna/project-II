@@ -1,7 +1,9 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { BsArrowDownRight, BsArrowUpRight } from "react-icons/bs";
 import { Column } from "@ant-design/plots";
 import { Table } from "antd";
+import axios from "axios";
+import {base_url} from "../utils/baseUrl";
 const columns = [
   {
     title: "SNo",
@@ -20,66 +22,69 @@ const columns = [
     dataIndex: "staus",
   },
 ];
-const data1 = [];
-for (let i = 0; i < 46; i++) {
-  data1.push({
-    key: i,
-    name: `Shehan De Silva ${i}`,
-    product: 32,
-    staus: `Kandy Road,Peradeniya. ${i}`,
-  });
-}
+// const data1 = [];
+// for (let i = 0; i < 46; i++) {
+//   data1.push({
+//     key: i,
+//     name: `Shehan De Silva ${i}`,
+//     product: 32,
+//     staus: `Kandy Road,Peradeniya. ${i}`,
+//   });
+// }
 const Dashboard = () => {
-  const data = [
-    {
-      type: "Jan",
-      sales: 38,
-    },
-    {
-      type: "Feb",
-      sales: 52,
-    },
-    {
-      type: "Mar",
-      sales: 61,
-    },
-    {
-      type: "Apr",
-      sales: 145,
-    },
-    {
-      type: "May",
-      sales: 48,
-    },
-    {
-      type: "Jun",
-      sales: 38,
-    },
-    {
-      type: "July",
-      sales: 38,
-    },
-    {
-      type: "Aug",
-      sales: 38,
-    },
-    {
-      type: "Sept",
-      sales: 38,
-    },
-    {
-      type: "Oct",
-      sales: 38,
-    },
-    {
-      type: "Nov",
-      sales: 38,
-    },
-    {
-      type: "Dec",
-      sales: 38,
-    },
-  ];
+  // const data = [
+  //   {
+  //     type: "Jan",
+  //     sales: 38,
+  //   },
+  //   {
+  //     type: "Feb",
+  //     sales: 52,
+  //   },
+  //   {
+  //     type: "Mar",
+  //     sales: 61,
+  //   },
+  //   {
+  //     type: "Apr",
+  //     sales: 145,
+  //   },
+  //   {
+  //     type: "May",
+  //     sales: 48,
+  //   },
+  //   {
+  //     type: "Jun",
+  //     sales: 38,
+  //   },
+  //   {
+  //     type: "July",
+  //     sales: 38,
+  //   },
+  //   {
+  //     type: "Aug",
+  //     sales: 38,
+  //   },
+  //   {
+  //     type: "Sept",
+  //     sales: 38,
+  //   },
+  //   {
+  //     type: "Oct",
+  //     sales: 38,
+  //   },
+  //   {
+  //     type: "Nov",
+  //     sales: 38,
+  //   },
+  //   {
+  //     type: "Dec",
+  //     sales: 38,
+  //   },
+  // ];
+  const [data1 , setData1] = useState([])
+  const [data , setDate] = useState([])
+  const [isloadin , setIsloading] = useState(true)
   const config = {
     data,
     xField: "type",
@@ -109,6 +114,37 @@ const Dashboard = () => {
       },
     },
   };
+
+
+  useEffect(()=>{
+      if(isloadin) {
+        getIncomeChartData();
+        getLatestOrder();
+      }
+  },[])
+  const getIncomeChartData  = () =>{
+    axios.get(`${base_url}user/getMonthWiseOrder`).then((res)=>{
+      setDate(res.data)
+      setIsloading(false)
+    })
+  }
+
+  const getLatestOrder = () =>{
+    axios.get(`${base_url}user/get-all-orders`).then((res)=>{
+      const a = []
+      res.data.map((obj , key)=>{
+        a.push({
+          key: key,
+          name: obj.orderby.firstname,
+          product: 32,
+          staus: obj.paymentIntent.status,
+        });
+      })
+
+      setData1(a)
+    })
+  }
+
   return (
     <div>
       <h3 className="mb-4 title">Dashboard</h3>

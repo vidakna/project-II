@@ -706,4 +706,82 @@ const updateOrderStatus = asyncHandler(async(req, res) => {
     }
 });
 
-module.exports = { createUser, loginUserCtrl, getallUser, getaUser, deleteaUser, updatedUser, blockUser, unblockUser, handleRefreshToken, logout, updatePassword, forgotPasswordToken, resetPassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, updateOrderStatus,getAllOrders,getOrderByUserId ,activeAccount, deleteOrder , getOrderById , getaUserUser};
+const getMonthWiseOrder = asyncHandler(async (req, res) => {
+    try {
+        const result = await Order.aggregate([
+            {
+                $group: {
+                    _id: {
+                        year: "$year",   // Group by the 'year' field
+                        month: "$month", // Group by the 'month' field
+                    },
+                    count: { $sum: 1 }, // Count the number of orders in each group
+                },
+            },
+            {
+                $project: {
+                    _id: 0, // Exclude the default _id field
+                    year: "$_id.year",   // Include the 'year' field
+                    month: "$_id.month", // Include the 'month' field
+                    count: 1, // Include the count field
+                },
+            },
+        ]);
+
+        // Create an array of all 12 months with count set to 0
+        const allMonths = Array.from({ length: 12 }, (_, i) => ({
+            year: null, // You can set the year to null for all months
+            month: i + 1, // Months are 1-indexed
+            count: 0,
+        }));
+
+        // Fill in the missing months in the result
+        result.forEach((item) => {
+            const index = item.month - 1; // Adjust for 0-based index
+            allMonths[index] = item;
+        });
+
+        // Map the data array to update the sales values
+        const data = [
+            { type: "Jan", sales: allMonths[0].count },
+            { type: "Feb", sales: allMonths[1].count },
+            { type: "Mar", sales: allMonths[2].count },
+            { type: "Apr", sales: allMonths[3].count },
+            { type: "May", sales: allMonths[4].count },
+            { type: "Jun", sales: allMonths[5].count },
+            { type: "July", sales: allMonths[6].count },
+            { type: "Aug", sales: allMonths[7].count },
+            { type: "Sept", sales: allMonths[8].count },
+            { type: "Oct", sales: allMonths[9].count },
+            { type: "Nov", sales: allMonths[10].count },
+            { type: "Dec", sales: allMonths[11].count },
+        ];
+
+        res.json(data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+const getOrdersAll = asyncHandler(async (req, res) => {
+
+    try {
+        const latestOrders = await Order.find({})
+            .sort({ createdAt: -1 }) // Sort by createdAt in descending order
+            .limit(10) // Limit the result to 10 documents
+            .populate({
+                path: "orderby", // Populate the 'orderby' field
+                select: "firstname", // Select only the 'userName' field from the User model
+            });
+
+        res.json(latestOrders);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+
+
+module.exports = { createUser, loginUserCtrl, getallUser, getaUser, deleteaUser, updatedUser, blockUser, unblockUser, handleRefreshToken, logout, updatePassword, forgotPasswordToken, resetPassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, updateOrderStatus,getAllOrders,getOrderByUserId ,activeAccount, deleteOrder , getOrderById , getaUserUser,getMonthWiseOrder , getOrdersAll};
