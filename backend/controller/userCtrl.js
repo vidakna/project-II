@@ -466,44 +466,73 @@ const getWishlist = asyncHandler(async(req, res) => {
         throw new Error(error);
     }
 });
-const userCart = asyncHandler(async(req, res) => {
+const userCart = asyncHandler(async (req, res) => {
     const { cart } = req.body;
     const { _id } = req.user;
-    validateMongoDbId(_id);
+
     try {
-        let products = [];
+        // Ensure user ID is a valid MongoDB ID
+        validateMongoDbId(_id);
+
+        // Find the user by ID
         const user = await User.findById(_id);
-        // check if user already have product in cart
-        const alreadyExistCart = await Cart.findOne({ orderby: user._id });
-        if (alreadyExistCart) {
-            alreadyExistCart.remove();
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
         }
+
+        // const Cart = mongoose.model("Cart");
+
+        // Check if user already has a cart
+        let existingCart = await Cart.findOne({ orderby: user._id });
+
+        // If there is an existing cart, remove it (optional)
+        // if (existingCart) {
+        //     await existingCart.remove();
+        // }
+
+        let products = [];
+
         for (let i = 0; i < cart.length; i++) {
             let object = {};
             object.product = cart[i]._id;
             object.count = cart[i].count;
             object.color = cart[i].color;
-            let getPrice = await Product.findById(cart[i]._id).select("price").exec();
-            object.price = getPrice.price;
+
+            // Retrieve product price by ID
+            const product = await Product.findById(cart[i]._id).select("price").exec();
+
+            if (!product) {
+                return res.status(404).json({ message: `Product not found for ID: ${cart[i]._id}` });
+            }
+
+            object.price = product.price;
             products.push(object);
         }
+
         let cartTotal = 0;
+
         for (let i = 0; i < products.length; i++) {
-            cartTotal = cartTotal + products[i].price * products[i].count;
+            cartTotal += products[i].price * products[i].count;
         }
-        console.log(products, cartTotal);
-        let newCart = await new Cart({
+
+        // Create a new Cart instance and save it to the database
+        let newCart = new Cart({
             products,
             cartTotal,
             orderby: user._id,
-        }).save();
-        res.json(newCart);
-        console.log(products);
-    } catch (error) {
-        throw new Error(error);
-    }
+            active:true
+        });
 
+        const savedCart = await newCart.save();
+        res.json(savedCart);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
 });
+
+
 const getUserCart = asyncHandler(async(req, res) => {
     const { _id } = req.user;
     validateMongoDbId(_id);
@@ -561,7 +590,7 @@ const createOrder = asyncHandler(async(req, res) => {
         } else {
             finalAmout = userCart.cartTotal;
         }
-
+        const createdAt = this.createdAt || new Date();
         let newOrder = await new Order({
             products: userCart.products,
             paymentIntent: {
@@ -574,6 +603,8 @@ const createOrder = asyncHandler(async(req, res) => {
             },
             orderby: user._id,
             orderStatus: "Cash on Delivery",
+            year : createdAt.getFullYear(),
+            month : createdAt.getMonth() + 1,
         }).save();
         let update = userCart.products.map((item) => {
             return {

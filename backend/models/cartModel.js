@@ -1,7 +1,6 @@
-const mongoose = require("mongoose"); // Erase if already required
+const mongoose = require("mongoose");
 
-// Declare the Schema of the Mongo model
-var cartSchema = new mongoose.Schema({
+const cartSchema = new mongoose.Schema({
     products: [{
         product: {
             type: mongoose.Schema.Types.ObjectId,
@@ -10,9 +9,13 @@ var cartSchema = new mongoose.Schema({
         count: Number,
         color: String,
         price: Number,
-    }, ],
+    }],
     cartTotal: Number,
     totalAfterDiscount: Number,
+    active: {
+        type: Boolean, // Boolean field for cart activity
+        default: true, // You can set a default value if needed
+    },
     orderby: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -21,5 +24,5 @@ var cartSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-//Export the model
+// Export the model
 module.exports = mongoose.model("Cart", cartSchema);
