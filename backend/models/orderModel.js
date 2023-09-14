@@ -29,6 +29,12 @@ const orderSchema = new mongoose.Schema({
     },
     year: Number, // Remove 'required: true'
     month: Number, // Remove 'required: true'
+    firstName : String,
+    lastName : String,
+    address : String,
+    phone : String,
+    city : String,
+    zipCode : String
 }, {
     timestamps: true,
 });

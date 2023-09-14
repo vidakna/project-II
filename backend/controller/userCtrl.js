@@ -577,7 +577,7 @@ const applyCoupon = asyncHandler(async(req, res) => {
 });
 
 const createOrder = asyncHandler(async(req, res) => {
-    const { COD, couponApplied } = req.body;
+    const { COD, couponApplied ,firstName,  lastName , address , phone , city , zipCode} = req.body;
     const { _id } = req.user;
     validateMongoDbId(_id);
     try {
@@ -605,6 +605,12 @@ const createOrder = asyncHandler(async(req, res) => {
             orderStatus: "Cash on Delivery",
             year : createdAt.getFullYear(),
             month : createdAt.getMonth() + 1,
+            firstName : firstName,
+            lastName : lastName,
+            address : address,
+            phone : phone,
+            city : city,
+            zipCode : zipCode,
         }).save();
         let update = userCart.products.map((item) => {
             return {

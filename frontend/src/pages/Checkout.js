@@ -10,6 +10,14 @@ const Checkout = () => {
 
   const [cart , setCart] = useState(null)
   const [isCartLoading , setIsCartLoading] = useState(true)
+
+  const [firstName , setFirstName] = useState("")
+  const [lastName , setLastName] = useState("")
+  const [address , setAddress] = useState("")
+  const [phone , setPhone] = useState("")
+  const [city , setCity] = useState("")
+  const [zip , setZip ] = useState("")
+
   useEffect(()=>{
     getCartInfo();
   } , [])
@@ -32,7 +40,13 @@ const Checkout = () => {
       const o = {
         _id : obj._id,
         count : obj.selectedQty,
-        color : "64d630e0cd312f71dbe8f019"
+        color : "64d630e0cd312f71dbe8f019",
+        firstName : firstName,
+        lastName : lastName,
+        address : address,
+        phone : phone,
+        city : city,
+        zip : zip
       }
 
       cartA.push(o)
@@ -49,6 +63,7 @@ const Checkout = () => {
       placeOrder()
     }).catch((e)=>{
       console.log(e)
+      alert("ORDER PLACE ERROR")
     })
 
     const placeOrder = () =>{
@@ -60,8 +75,17 @@ const Checkout = () => {
 
       axios.post(`${base_url}user/cart/cash-order` , body , config).then((res)=>{
         console.log("ok")
+        alert("ORDER PLACE SUCCESS")
+
+        setFirstName("")
+        setLastName("")
+        setAddress("")
+        setPhone("")
+        setCity("")
+        setZip("")
       }).catch((e)=>{
         console.log(e)
+        alert("ORDER PLACE ERROR")
       })
     }
 
@@ -122,6 +146,8 @@ const Checkout = () => {
                 </div> */}
                 <div className="flex-grow-1">
                   <input
+                      value={firstName}
+                      onChange={(e)=>{setFirstName(e.target.value)}}
                     type="text"
                     placeholder="First Name"
                     className="form-control"
@@ -130,12 +156,16 @@ const Checkout = () => {
                 <div className="flex-grow-1">
                   <input
                     type="text"
+                    value={lastName}
+                    onChange={(e)=>{setLastName(e.target.value)}}
                     placeholder="Last Name"
                     className="form-control"
                   />
                 </div>
                 <div className="w-100">
                   <input
+                      value={address}
+                      onChange={(e)=>{setAddress(e.target.value)}}
                     type="text"
                     placeholder="Address"
                     className="form-control"
@@ -144,6 +174,8 @@ const Checkout = () => {
                 <div className="w-100">
                   <input
                     type="text"
+                    value={phone}
+                    onChange={(e)=>{setPhone(e.target.value)}}
                     placeholder="Telephone number"
                     className="form-control"
                   />
@@ -151,6 +183,8 @@ const Checkout = () => {
                 <div className="flex-grow-1">
                   <input
                     type="text"
+                    value={city}
+                    onChange={(e)=>{setCity(e.target.value)}}
                     placeholder="City"
                     className="form-control"
                   />
@@ -165,6 +199,8 @@ const Checkout = () => {
                 <div className="flex-grow-1">
                   <input
                     type="text"
+                    value={zip}
+                    onChange={(e)=>{setZip(e.target.value)}}
                     placeholder="Zipcode"
                     className="form-control"
                   />
