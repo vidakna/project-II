@@ -20,6 +20,7 @@ import axios from "axios";
 // import {base_url, config} from "../utills/axiosConfig";
 import {productService} from "../features/products/productService";
 import {authService} from "../features/user/userService";
+import {addToCartLocal} from "../features/cart/CartService";
 
 const SingleProduct = () => {
   const location=useLocation();
@@ -125,6 +126,13 @@ const SingleProduct = () => {
     return "User"
   }
 
+  const [qty , setQty] = useState(1)
+  const addToCart = (itemId) =>{
+    const updatedObject = { ...productState, selectedQty: parseInt(qty) };
+    addToCartLocal(updatedObject , qty)
+
+  }
+
   return (
     <>
       <Meta title={"Product Name"} />
@@ -155,7 +163,6 @@ const SingleProduct = () => {
                       </PresentationControls>
                     </Canvas>
                 ) :
-
                     <div>
                       {productState?.images?.map((item, index) => { // Add ?. after images
                         return (
@@ -255,8 +262,10 @@ const SingleProduct = () => {
                       type="number"
                       name=""
                       min={1}
+                      value={qty}
                       max={10}
                       className="form-control"
+                      onChange={(e)=>setQty(e.target.value)}
                       style={{ width: "70px" }}
                       id=""
                     />
@@ -267,6 +276,7 @@ const SingleProduct = () => {
                       data-bs-toggle="modal"
                       data-bs-target="#staticBackdrop"
                       type="button"
+                      onClick={() => addToCart(productState._id)}
                     >
                       Add to Cart
                     </button>

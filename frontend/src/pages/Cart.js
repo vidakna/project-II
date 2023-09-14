@@ -44,7 +44,31 @@ const Cart = () => {
     });
   };
 
+  const [cart , setCart] = useState(null)
+  const [isCartLoading , setIsCartLoading] = useState(true)
+  useEffect(()=>{
+      getCartInfo();
+  } , [])
 
+
+  const [totalPrice, setTprice] = useState(0);
+  const getCartInfo = () => {
+    if (isCartLoading) {
+      const cart1 = localStorage.getItem("cart")
+      const cartJSON = JSON.parse(cart1);
+      setCart(cartJSON);
+      if (cart) {
+        var p = 0;
+        cartJSON.map((k) => {
+          p = p + (k.selectedQty * k.price)
+
+        })
+
+        setTprice(p)
+        setLoading(false);
+      }
+    }
+  }
 
   if(!loading) {
     return (
@@ -60,39 +84,52 @@ const Cart = () => {
                   <h4 className="cart-col-3">Quantity</h4>
                   <h4 className="cart-col-4">Total</h4>
                 </div>
-                <div className="cart-data py-3 mb-2 d-flex justify-content-between align-items-center">
-                  <div className="cart-col-1 gap-15 d-flex align-items-center">
-                    <div className="w-25">
-                      <img src={watch} className="img-fluid" alt="product image"/>
-                    </div>
-                    <div className="w-75">
-                      <p>Haylou RS4 Plus</p>
-                      <p>Size: XL</p>
-                      <p>Color: Red</p>
-                    </div>
-                  </div>
-                  <div className="cart-col-2">
-                    <h5 className="price">Rs.12000</h5>
-                  </div>
-                  <div className="cart-col-3 d-flex align-items-center gap-15">
-                    <div>
-                      <input
-                          className="form-control"
-                          type="number"
-                          name=""
-                          min={1}
-                          max={10}
-                          id=""
-                      />
-                    </div>
-                    <div>
-                      <AiFillDelete className="text-danger "/>
-                    </div>
-                  </div>
-                  <div className="cart-col-4">
-                    <h5 className="price">Rs.12000</h5>
-                  </div>
-                </div>
+
+                {cart && cart.map((obj) =>{
+                  return (
+                      <div className="cart-data py-3 mb-2 d-flex justify-content-between align-items-center">
+                        <div className="cart-col-1 gap-15 d-flex align-items-center">
+                          <div className="w-25">
+                            {obj && obj.images && obj.images.length > 0 ? (
+                                <img src={obj.images[0]} className="img-fluid" alt="product image" />
+                            ) : (
+                                <span>No product image available</span>
+                            )}
+                          </div>
+                          <div className="w-75">
+                            <p>{obj.title}</p>
+                            <p>{obj.brand}</p>
+                            {/*<p>Color: Red</p>*/}
+                          </div>
+                        </div>
+                        <div className="cart-col-2">
+                          <h5 className="price">{obj.price}</h5>
+                        </div>
+                        <div className="cart-col-3 d-flex align-items-center gap-15">
+                          <div>
+                            <input
+                                disabled={true}
+                                className="form-control"
+                                type="number"
+                                name=""
+                                value={obj.selectedQty}
+                                min={1}
+                                max={10}
+                                id=""
+                            />
+                          </div>
+                          <div>
+                            <AiFillDelete className="text-danger "/>
+                          </div>
+                        </div>
+                        <div className="cart-col-4">
+                          <h5 className="price">{obj.price * obj.selectedQty}</h5>
+                        </div>
+                      </div>
+                  )
+                })}
+
+
               </div>
               <div className="col-12 py-2 mt-4">
                 <div className="d-flex justify-content-between align-items-baseline">
@@ -100,7 +137,7 @@ const Cart = () => {
                     Continue To Shopping
                   </Link>
                   <div className="d-flex flex-column align-items-end">
-                    <h4>SubTotal: Rs.12000</h4>
+                    <h4>SubTotal: {totalPrice}</h4>
                     <p>shipping calculated at checkout</p>
                     <Link to="/checkout" className="button">
                       Checkout

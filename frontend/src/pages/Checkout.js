@@ -1,10 +1,72 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import watch from "../images/watch.jpg";
 import Container from "../components/Container";
+import axios from "axios";
+import {base_url, config} from "../utills/axiosConfig";
 
 const Checkout = () => {
+
+  const [cart , setCart] = useState(null)
+  const [isCartLoading , setIsCartLoading] = useState(true)
+  useEffect(()=>{
+    getCartInfo();
+  } , [])
+
+
+  const getCartInfo = () =>{
+    if(isCartLoading) {
+      const cart1 = localStorage.getItem("cart")
+      const cartJSON = JSON.parse(cart1);
+      setCart(cartJSON);
+      setIsCartLoading(false)
+    }
+  }
+
+
+  const placeOrder = (e) =>{
+    e.preventDefault()
+    const cartA = []
+    cart.map((obj)=>{
+      const o = {
+        _id : obj._id,
+        count : obj.selectedQty,
+        color : "64d630e0cd312f71dbe8f019"
+      }
+
+      cartA.push(o)
+    })
+
+    const body = {
+      cart : cartA
+    }
+
+
+    axios.post(`${base_url}user/cart` , body ,config).then((res)=>{
+      console.log("ok")
+      localStorage.removeItem("cart")
+      placeOrder()
+    }).catch((e)=>{
+      console.log(e)
+    })
+
+    const placeOrder = () =>{
+      const body =
+          {
+            COD: true,
+            couponApplied: true
+          }
+
+      axios.post(`${base_url}user/cart/cash-order` , body , config).then((res)=>{
+        console.log("ok")
+      }).catch((e)=>{
+        console.log(e)
+      })
+    }
+
+  }
+
   return (
     <>
       <Container class1="checkout-wrapper py-5 home-wrapper-2">
@@ -113,51 +175,51 @@ const Checkout = () => {
                       <BiArrowBack className="me-2" />
                       Return to Cart
                     </Link>
-                    <Link to="/cart" className="button">
-                      Continue to Shipping
-                    </Link>
+                    <button className="button" onClick={placeOrder}>
+                      Check Out
+                    </button>
                   </div>
                 </div>
               </form>
             </div>
           </div>
           <div className="col-5">
-            <div className="border-bottom py-4">
-              <div className="d-flex gap-10 mb-2 align-align-items-center">
-                <div className="w-75 d-flex gap-10">
-                  <div className="w-25 position-relative">
-                    <span
-                      style={{ top: "-10px", right: "2px" }}
-                      className="badge bg-secondary text-white rounded-circle p-2 position-absolute"
-                    >
-                      1
-                    </span>
-                    <img className="img-fluid" src={watch} alt="product" />
-                  </div>
-                  <div>
-                    <h5 className="total-price">Haylou RS4 Plus</h5>
-                    {/* <p className="total-price">s / #agfgfd</p> */}
-                  </div>
-                </div>
-                <div className="flex-grow-1">
-                  <h5 className="total">Rs.12000</h5>
-                </div>
-              </div>
-            </div>
-            <div className="border-bottom py-4">
-              <div className="d-flex justify-content-between align-items-center">
-                <p className="total">Subtotal</p>
-                <p className="total-price">Rs.12000</p>
-              </div>
-              <div className="d-flex justify-content-between align-items-center">
-                <p className="mb-0 total">Shipping</p>
-                <p className="mb-0 total-price">Rs.500</p>
-              </div>
-            </div>
-            <div className="d-flex justify-content-between align-items-center border-bootom py-4">
-              <h4 className="total">Total</h4>
-              <h5 className="total-price">Rs.12500</h5>
-            </div>
+            {/*<div className="border-bottom py-4">*/}
+            {/*  <div className="d-flex gap-10 mb-2 align-align-items-center">*/}
+            {/*    <div className="w-75 d-flex gap-10">*/}
+            {/*      <div className="w-25 position-relative">*/}
+            {/*        <span*/}
+            {/*          style={{ top: "-10px", right: "2px" }}*/}
+            {/*          className="badge bg-secondary text-white rounded-circle p-2 position-absolute"*/}
+            {/*        >*/}
+            {/*          1*/}
+            {/*        </span>*/}
+            {/*        <img className="img-fluid" src={watch} alt="product" />*/}
+            {/*      </div>*/}
+            {/*      <div>*/}
+            {/*        <h5 className="total-price">Haylou RS4 Plus</h5>*/}
+            {/*        /!* <p className="total-price">s / #agfgfd</p> *!/*/}
+            {/*      </div>*/}
+            {/*    </div>*/}
+            {/*    <div className="flex-grow-1">*/}
+            {/*      <h5 className="total">Rs.12000</h5>*/}
+            {/*    </div>*/}
+            {/*  </div>*/}
+            {/*</div>*/}
+            {/*<div className="border-bottom py-4">*/}
+            {/*  <div className="d-flex justify-content-between align-items-center">*/}
+            {/*    <p className="total">Subtotal</p>*/}
+            {/*    <p className="total-price">Rs.12000</p>*/}
+            {/*  </div>*/}
+            {/*  <div className="d-flex justify-content-between align-items-center">*/}
+            {/*    <p className="mb-0 total">Shipping</p>*/}
+            {/*    <p className="mb-0 total-price">Rs.500</p>*/}
+            {/*  </div>*/}
+            {/*</div>*/}
+            {/*<div className="d-flex justify-content-between align-items-center border-bootom py-4">*/}
+            {/*  <h4 className="total">Total</h4>*/}
+            {/*  <h5 className="total-price">Rs.12500</h5>*/}
+            {/*</div>*/}
           </div>
         </div>
       </Container>
