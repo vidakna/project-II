@@ -97,6 +97,20 @@ const ViewOrder = () => {
   //     ),
   //   });
 
+  const changeStatus = (r) =>{
+    const data = {
+      status:r
+    }
+
+    console.log(`${base_url}user/order/update-order/${orderState?._id}`)
+    axios.put(`${base_url}user/order/update-order/${orderState?._id}` , data , config).then((res) =>{
+      window.location.reload(true)
+    }).catch((e)=>{
+      console.error(e)
+      alert("ORDER UPDATE FAIL")
+    })
+  }
+
   if(!loading && orderState) {
     return (
         <div>
@@ -109,6 +123,52 @@ const ViewOrder = () => {
                     <div>{e.product}</div>
                 )
               })}
+
+              <div style={{display: "flex", justifyContent: "space-between", width: "500px"}}>
+                <div style={{minWidth: "100px"}}>Year : </div>
+                <div style={{minWidth: "400px"}}>{orderState?.year}</div>
+              </div>
+
+              <div style={{display: "flex", justifyContent: "space-between", width: "500px"}}>
+                <div style={{minWidth: "100px"}}>Month : </div>
+                <div style={{minWidth: "400px"}}>{orderState?.month}</div>
+              </div>
+
+              <div style={{display: "flex", justifyContent: "space-between", width: "500px"}}>
+                <div style={{minWidth: "100px"}}>First name : </div>
+                <div style={{minWidth: "400px"}}>{orderState?.firstName}</div>
+              </div>
+
+              <div style={{display: "flex", justifyContent: "space-between", width: "500px"}}>
+                <div style={{minWidth: "100px"}}>Last name : </div>
+                <div style={{minWidth: "400px"}}>{orderState?.lastName}</div>
+              </div>
+
+              <div style={{display: "flex", justifyContent: "space-between", width: "500px"}}>
+                <div style={{minWidth: "100px"}}>Phone number : </div>
+                <div style={{minWidth: "400px"}}>{orderState?.phone}</div>
+              </div>
+
+              <div style={{display: "flex", justifyContent: "space-between", width: "500px"}}>
+                <div style={{minWidth: "100px"}}>City : </div>
+                <div style={{minWidth: "400px"}}>{orderState?.city}</div>
+              </div>
+
+              <div style={{display: "flex", justifyContent: "space-between", width: "500px"}}>
+                <div style={{minWidth: "100px"}}>Zip : </div>
+                <div style={{minWidth: "400px"}}>{orderState?.zipCode}</div>
+              </div>
+
+              <select name="test" id="test" onChange={(e) => changeStatus(e.target.value)} value={orderState?.orderStatus}>
+                <option value="Not Processed" >Not Processed</option>
+                <option value="Not Processed" >Not Processed</option>
+                <option value="Cash on Delivery" >Cash on Delivery</option>
+                <option value="Processing" >Processing</option>
+                <option value="Dispatched" >Dispatched</option>
+                <option value="Cancelled" >Cancelled</option>
+                <option value="Delivered" >Delivered</option>
+              </select>
+
             </div>
           </div>
         </div>
