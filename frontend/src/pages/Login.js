@@ -26,7 +26,9 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       dispatch(loginUser(values));
+      window.location.reload(true)
     },
+
   });
 
 

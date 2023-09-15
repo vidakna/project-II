@@ -15,6 +15,14 @@ const Header = () => {
   const [searchInput, setSearchInput] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const dropdownRef = useRef(null);
+  const [isToken , setIsToken] = useState(false);
+  useEffect(()=>{
+    if(localStorage.getItem("token") == null){
+      setIsToken(false);
+    }else {
+      setIsToken(true)
+    }
+  })
 
 
   const [products , setproducts] = useState([]);
@@ -48,6 +56,11 @@ const Header = () => {
 
   const clearInput = () => {
     searchInput("")
+  }
+
+  const logout = () =>{
+    localStorage.removeItem("token")
+    window.location.reload(true)
   }
 
 
@@ -118,15 +131,38 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link
-                    to="/login"
-                    className="d-flex align-items-center gap-10 text-white"
-                  >
-                    <img src={user} alt="user" />
-                    <p className="mb-0">
-                      Log in <br /> My Account
-                    </p>
-                  </Link>
+                  {isToken && (
+                      <>
+
+                        <div onClick={logout}>
+                          <Link
+                              to={"/login"}
+                              className="d-flex align-items-center gap-10 text-white"
+                          >
+                          <img src={user} alt="user" />
+                          <p className="mb-0">
+                            Log out <br /> My Account
+                          </p>
+                          </Link>
+                        </div>
+
+                      </>
+                  )}
+
+                  {!isToken && (
+                      <>
+                        <Link
+                            to="/login"
+                            className="d-flex align-items-center gap-10 text-white"
+                        >
+                          <img src={user} alt="user" />
+                          <p className="mb-0">
+                            Log in <br /> My Account
+                          </p>
+                        </Link>
+                      </>
+                  )}
+
                 </div>
                 <div>
                   <Link
