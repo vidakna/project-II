@@ -159,15 +159,22 @@ const ViewOrder = () => {
                 <div style={{minWidth: "400px"}}>{orderState?.zipCode}</div>
               </div>
 
-              <select name="test" id="test" onChange={(e) => changeStatus(e.target.value)} value={orderState?.orderStatus}>
-                <option value="Not Processed" >Not Processed</option>
-                <option value="Not Processed" >Not Processed</option>
-                <option value="Cash on Delivery" >Cash on Delivery</option>
-                <option value="Processing" >Processing</option>
-                <option value="Dispatched" >Dispatched</option>
-                <option value="Cancelled" >Cancelled</option>
-                <option value="Delivered" >Delivered</option>
-              </select>
+              <div style={{display: "flex", justifyContent: "space-between", width: "500px"}}>
+                <div style={{minWidth: "100px"}}>Changed : </div>
+                <div style={{minWidth: "400px"}}>
+                  <select data-te-select-init name="test" id="test" onChange={(e) => changeStatus(e.target.value)} value={orderState?.orderStatus}>
+                    <option value="Not Processed" >Not Processed</option>
+                    <option value="Not Processed" >Not Processed</option>
+                    <option value="Cash on Delivery" >Cash on Delivery</option>
+                    <option value="Processing" >Processing</option>
+                    <option value="Dispatched" >Dispatched</option>
+                    <option value="Cancelled" >Cancelled</option>
+                    <option value="Delivered" >Delivered</option>
+                  </select>
+                </div>
+              </div>
+
+
 
             </div>
           </div>
