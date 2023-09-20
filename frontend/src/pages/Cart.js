@@ -70,6 +70,25 @@ const Cart = () => {
     }
   }
 
+  let b = 0;
+  const test = (a) =>{
+    b = b +a;
+    return a;
+  }
+
+  const removeItems = (id) => {
+    console.log(id);
+    const cart1 = localStorage.getItem("cart");
+    const cartJSON = JSON.parse(cart1);
+
+    const updatedCartJSON = cartJSON.filter(item => item._id !== id);
+
+    const cartString = JSON.stringify(updatedCartJSON);
+    localStorage.setItem('cart', cartString);
+    window.location.reload();
+  }
+
+
   if(!loading) {
     return (
         <>
@@ -119,11 +138,11 @@ const Cart = () => {
                             />
                           </div>
                           <div>
-                            <AiFillDelete className="text-danger "/>
+                            <AiFillDelete onClick={()=>removeItems(obj._id)} className="text-danger "/>
                           </div>
                         </div>
                         <div className="cart-col-4">
-                          <h5 className="price">{obj.price * obj.selectedQty}</h5>
+                          <h5 className="price">{test(obj.price * obj.selectedQty)}</h5>
                         </div>
                       </div>
                   )
@@ -137,7 +156,7 @@ const Cart = () => {
                     Continue To Shopping
                   </Link>
                   <div className="d-flex flex-column align-items-end">
-                    <h4>SubTotal: {totalPrice}</h4>
+                    <h4>SubTotal: {b}</h4>
                     <p>shipping calculated at checkout</p>
                     <Link to="/checkout" className="button">
                       Checkout
