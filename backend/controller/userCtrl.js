@@ -577,7 +577,8 @@ const applyCoupon = asyncHandler(async(req, res) => {
 });
 
 const createOrder = asyncHandler(async(req, res) => {
-    const { COD, couponApplied ,firstName,  lastName , address , phone , city , zipCode} = req.body;
+    const { COD, couponApplied ,firstName,  lastName , address , phone , city , zipCode , orderPrice} = req.body;
+    console.info(orderPrice)
     const { _id } = req.user;
     validateMongoDbId(_id);
     try {
@@ -596,7 +597,7 @@ const createOrder = asyncHandler(async(req, res) => {
             paymentIntent: {
                 id: uniqid(),
                 method: "COD",
-                amount: finalAmout,
+                amount: orderPrice,
                 status: "Cash on Delivery",
                 created: Date.now(),
                 currency: "Rs",
@@ -611,6 +612,7 @@ const createOrder = asyncHandler(async(req, res) => {
             phone : phone,
             city : city,
             zipCode : zipCode,
+            orderPrice : orderPrice
         }).save();
         let update = userCart.products.map((item) => {
             return {

@@ -73,6 +73,7 @@ const Cart = () => {
   let b = 0;
   const test = (a) =>{
     b = b +a;
+    localStorage.setItem('cartPrice' , b);
     return a;
   }
 

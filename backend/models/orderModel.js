@@ -34,7 +34,8 @@ const orderSchema = new mongoose.Schema({
     address : String,
     phone : String,
     city : String,
-    zipCode : String
+    zipCode : String,
+    orderPrice : Number
 }, {
     timestamps: true,
 });

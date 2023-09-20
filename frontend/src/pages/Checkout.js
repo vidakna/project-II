@@ -9,6 +9,7 @@ import {base_url, config} from "../utills/axiosConfig";
 const Checkout = () => {
 
   const [cart , setCart] = useState(null)
+  const [cartPrice , setCartPrice] = useState(0)
   const [isCartLoading , setIsCartLoading] = useState(true)
 
   const [firstName , setFirstName] = useState("")
@@ -28,6 +29,7 @@ const Checkout = () => {
       const cart1 = localStorage.getItem("cart")
       const cartJSON = JSON.parse(cart1);
       setCart(cartJSON);
+      setCartPrice(parseInt(localStorage.getItem('cartPrice')));
       setIsCartLoading(false)
     }
   }
@@ -41,12 +43,6 @@ const Checkout = () => {
         _id : obj._id,
         count : obj.selectedQty,
         color : "64d630e0cd312f71dbe8f019",
-        firstName : firstName,
-        lastName : lastName,
-        address : address,
-        phone : phone,
-        city : city,
-        zip : zip
       }
 
       cartA.push(o)
@@ -70,7 +66,14 @@ const Checkout = () => {
       const body =
           {
             COD: true,
-            couponApplied: true
+            couponApplied: true,
+            firstName : firstName,
+            lastName : lastName,
+            address : address,
+            phone : phone,
+            city : city,
+            zip : zip,
+            orderPrice : cartPrice
           }
 
       axios.post(`${base_url}user/cart/cash-order` , body , config).then((res)=>{
