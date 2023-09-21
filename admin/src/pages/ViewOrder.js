@@ -8,6 +8,7 @@ import { getOrderByUser, getOrders } from "../features/auth/authSlice";
 import axios from "axios";
 import {base_url} from "../utils/baseUrl";
 import {config} from "../utils/axiosconfig";
+import OrderItem from "../components/OrderItem";
 
 const columns = [
   {
@@ -116,13 +117,21 @@ const ViewOrder = () => {
         <div>
           <h3 className="mb-4 title">{orderState?.orderStatus}</h3>
           <div className="card">
-            <h5 className="card-header">RS : {orderState?.paymentIntent.amount} {orderState?.paymentIntent.status}</h5>
+            <h5 className="card-header"> {orderState?.paymentIntent.status}</h5>
             <div className="card-body">
               {orderState?.products.map((e)=>{
                 return(
-                    <div>{e.product}</div>
+                    <div>
+                      <OrderItem productId={e.product}></OrderItem>
+                    </div>
                 )
               })}
+              {/*{orderState?.paymentIntent.amount}*/}
+
+              <div style={{display: "flex", justifyContent: "space-between", width: "500px"}}>
+                <div style={{minWidth: "100px"}}>Rs : </div>
+                <div style={{minWidth: "400px"}}>{orderState?.orderPrice}</div>
+              </div>
 
               <div style={{display: "flex", justifyContent: "space-between", width: "500px"}}>
                 <div style={{minWidth: "100px"}}>Year : </div>

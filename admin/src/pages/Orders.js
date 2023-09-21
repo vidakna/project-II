@@ -18,10 +18,10 @@ const columns = [
     title: "Name",
     dataIndex: "name",
   },
-  {
-    title: "Product",
-    dataIndex: "product",
-  },
+  // {
+  //   title: "Product",
+  //   dataIndex: "product",
+  // },
   {
     title: "Amount",
     dataIndex: "amount",
@@ -78,11 +78,11 @@ const Orders = () => {
       key: i + 1,
       name: orderState[i]?.orderby?.firstname,
       
-      product: (
-        <Link to={`/admin/order/${orderState[i]?.orderby?._id}`}>
-          View Orders
-        </Link>
-      ),
+      // product: (
+      //   <Link to={`/admin/order/${orderState[i]?.orderby?._id}`}>
+      //     View Orders
+      //   </Link>
+      // ),
       amount: orderState[i].paymentIntent.amount,
       date: new Date(orderState[i]?.createdAt).toLocaleString(),
       status:orderState[i].orderStatus,
