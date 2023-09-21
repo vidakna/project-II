@@ -728,7 +728,7 @@ const getMonthWiseOrder = asyncHandler(async (req, res) => {
                         year: "$year",   // Group by the 'year' field
                         month: "$month", // Group by the 'month' field
                     },
-                    count: { $sum: 1 }, // Count the number of orders in each group
+                    count: { $sum: "$orderPrice" }, // Count the number of orders in each group
                 },
             },
             {
