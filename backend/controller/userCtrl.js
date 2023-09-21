@@ -501,7 +501,7 @@ const userCart = asyncHandler(async (req, res) => {
 
             // Retrieve product price by ID
             const product = await Product.findById(cart[i]._id).select("price").exec();
-
+            console.info(product)
             if (!product) {
                 return res.status(404).json({ message: `Product not found for ID: ${cart[i]._id}` });
             }
@@ -584,7 +584,7 @@ const createOrder = asyncHandler(async(req, res) => {
     try {
         if (!COD) throw new Error("Create cash order failed");
         const user = await User.findById(_id);
-        let userCart = await Cart.findOne({ orderby: user._id });
+        let userCart = await Cart.findOne({ orderby: user._id , active : true});
         let finalAmout = 0;
         if (couponApplied && userCart.totalAfterDiscount) {
             finalAmout = userCart.totalAfterDiscount;
@@ -622,6 +622,11 @@ const createOrder = asyncHandler(async(req, res) => {
                 },
             };
         });
+        const updatedCart = await Cart.findByIdAndUpdate(
+            userCart._id,
+            { active: false },
+            { new: true } // This option returns the updated document
+        );
         const updated = await Product.bulkWrite(update, {});
         res.json({ message: "success" });
     } catch (error) {

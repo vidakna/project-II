@@ -14,6 +14,7 @@ const Header = () => {
 
   const [searchInput, setSearchInput] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [cartPrice, setCartPrice] = useState(0);
   const dropdownRef = useRef(null);
   const [isToken , setIsToken] = useState(false);
   useEffect(()=>{
@@ -21,6 +22,7 @@ const Header = () => {
       setIsToken(false);
     }else {
       setIsToken(true)
+      setCartPrice(parseInt(localStorage.getItem("cartPrice") == null ? 0 : localStorage.getItem("cartPrice")))
     }
   })
 
@@ -171,8 +173,8 @@ const Header = () => {
                   >
                     <img src={cart} alt="cart" />
                     <div className="d-flex flex-column gap-10">
-                      <span className="badge bg-white text-dark">0</span>
-                      <p className="mb-0">Rs 500</p>
+                      {/*<span className="badge bg-white text-dark">0</span>*/}
+                      {/*<p className="mb-0">Rs {cartPrice}</p>*/}
                     </div>
                   </Link>
                 </div>

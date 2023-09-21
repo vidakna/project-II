@@ -52,6 +52,7 @@ const Checkout = () => {
       cart : cartA
     }
 
+    console.log(cartA)
 
     axios.post(`${base_url}user/cart` , body ,config).then((res)=>{
       console.log("ok")
@@ -86,6 +87,8 @@ const Checkout = () => {
         setPhone("")
         setCity("")
         setZip("")
+        localStorage.setItem("cartPrice" , 0)
+        // window.location.reload()
       }).catch((e)=>{
         console.log(e)
         alert("ORDER PLACE ERROR")
