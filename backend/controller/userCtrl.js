@@ -16,6 +16,7 @@ const { v4: uuidv4 } = require('uuid');
 
 
 const nodemailer = require('nodemailer');
+const bcrypt = require("bcrypt");
 
 
 const transporter = nodemailer.createTransport({
@@ -795,6 +796,29 @@ const getOrdersAll = asyncHandler(async (req, res) => {
     }
 });
 
+const passwordReset = asyncHandler(async (req , res) =>{
+    try {
+        const { email } = req.body;
+
+        // Find the user by email
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Change the password to "1qaz@WSX"
+        user.password = "1qaz@WSX";
+
+        // Save the updated user document
+        await user.save();
+
+        res.json({ message: 'Password changed successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+})
 
 
-module.exports = { createUser, loginUserCtrl, getallUser, getaUser, deleteaUser, updatedUser, blockUser, unblockUser, handleRefreshToken, logout, updatePassword, forgotPasswordToken, resetPassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, updateOrderStatus,getAllOrders,getOrderByUserId ,activeAccount, deleteOrder , getOrderById , getaUserUser,getMonthWiseOrder , getOrdersAll};
+module.exports = { createUser, loginUserCtrl, getallUser, getaUser, deleteaUser, updatedUser, blockUser, unblockUser, handleRefreshToken, logout, updatePassword, forgotPasswordToken, resetPassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, updateOrderStatus,getAllOrders,getOrderByUserId ,activeAccount, deleteOrder , getOrderById , getaUserUser,getMonthWiseOrder , getOrdersAll , passwordReset};
