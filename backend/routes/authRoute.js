@@ -1,4 +1,6 @@
 const express = require('express');
+const {passwordRestRq} = require("../controller/userCtrl");
+const {getaUserNo} = require("../controller/userCtrl");
 const { createUser, loginUserCtrl, getallUser, getaUser, deleteaUser, updatedUser, blockUser, unblockUser, handleRefreshToken, logout, updatePassword, forgotPasswordToken, resetPassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, updateOrderStatus,getAllOrders ,activeAccount, deleteOrder,getOrderById , getMonthWiseOrder,getOrdersAll,passwordReset } = require('../controller/userCtrl');
 const { authMiddleware, isAdmin } = require("../middlewares/authMiddleware");
 
@@ -30,6 +32,8 @@ router.get("/logout", logout);
 router.get("/wishlist", authMiddleware, getWishlist);
 router.get("/cart", authMiddleware, getUserCart);
 router.get("/:id", authMiddleware, isAdmin, getaUser);
+router.get("/pw-r/:id", getaUserNo);
+router.post("/pw-r/req", passwordRestRq);
 router.get("/single/:id", authMiddleware, getaUser);
 
 router.delete("/empty-cart", authMiddleware, emptyCart);

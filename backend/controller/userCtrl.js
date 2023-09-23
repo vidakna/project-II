@@ -342,6 +342,33 @@ const getaUser = asyncHandler(async(req, res) => {
     }
 });
 
+const getaUserNo = asyncHandler(async(req, res) => {
+    const { id } = req.params;
+    validateMongoDbId(id);
+    try {
+        const getaUser = await User.findById(id);
+        res.json({
+            getaUser,
+        });
+    } catch (error) {
+        throw new Error(error);
+    }
+});
+
+const passwordRestRq = asyncHandler(async(req, res) => {
+    const { id , password } = req.body;
+    console.log(password)
+    validateMongoDbId(id);
+    const user = await User.findById(id);
+    if (password) {
+        user.password = password;
+        const updatedPassword = await user.save();
+        res.json(updatedPassword);
+    } else {
+        res.json(user);
+    }
+});
+
 const getaUserUser = asyncHandler(async(req, res) => {
     const { id } = req.params;
     validateMongoDbId(id);
@@ -807,13 +834,24 @@ const passwordReset = asyncHandler(async (req , res) =>{
             return res.status(404).json({ message: 'User not found' });
         }
 
-        // Change the password to "1qaz@WSX"
-        user.password = "1qaz@WSX";
 
-        // Save the updated user document
-        await user.save();
+        const mailOptions = {
+            from: `${process.env.MAIL_ID}`, // Replace with your Gmail email
+            to: `bluephoenix783@gmail.com`,
+            subject: 'Verification Code',
+            text: `Your verification code is: http://localhost:3000/reset-password/${user._id.toString()}`,
+        };
 
-        res.json({ message: 'Password changed successfully' });
+        console.log(mailOptions)
+        try {
+            const info = await transporter.sendMail(mailOptions);
+            console.log('Email sent:', info.response);
+            res.json({ message: 'Verification code sent to your email.' });
+        } catch (error) {
+            console.error('Email sending error:', error);
+            res.status(500).json({ error: 'An error occurred while sending the email.' });
+        }
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error' });
@@ -821,4 +859,4 @@ const passwordReset = asyncHandler(async (req , res) =>{
 })
 
 
-module.exports = { createUser, loginUserCtrl, getallUser, getaUser, deleteaUser, updatedUser, blockUser, unblockUser, handleRefreshToken, logout, updatePassword, forgotPasswordToken, resetPassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, updateOrderStatus,getAllOrders,getOrderByUserId ,activeAccount, deleteOrder , getOrderById , getaUserUser,getMonthWiseOrder , getOrdersAll , passwordReset};
+module.exports = { createUser, loginUserCtrl, getallUser, getaUser, deleteaUser, updatedUser, blockUser, unblockUser, handleRefreshToken, logout, updatePassword, forgotPasswordToken, resetPassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, updateOrderStatus,getAllOrders,getOrderByUserId ,activeAccount, deleteOrder , getOrderById , getaUserUser,getMonthWiseOrder , getOrdersAll , passwordReset , getaUserNo , passwordRestRq};

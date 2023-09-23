@@ -21,6 +21,7 @@ import TermAndContions from "./pages/TermAndContions";
 import SingleProduct from "./pages/SingleProduct";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import PasswordReset from "./pages/PasswordReset";
 function App() {
   return (
     <>
@@ -39,6 +40,7 @@ function App() {
             <Route path="compare-product" element={<CompareProduct />} />
             <Route path="wishlist" element={<Wishlist />} />
             <Route path="login" element={<Login />} />
+            <Route path="reset-password/:id" element={<PasswordReset />} />
             <Route path="forgot-password" element={<Forgotpassword />} />
             <Route path="signup" element={<Signup />} />
             <Route path="reset-password" element={<Resetpassword />} />
