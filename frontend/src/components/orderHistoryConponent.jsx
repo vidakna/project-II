@@ -33,7 +33,7 @@ export function OrderHistoryConponent ({props}) {
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item">{singleObj?.category}</li>
                         <li className="list-group-item">{singleObj?.description && singleObj.description.replace(/<[^>]+>/g, '')}</li>
-                        <li className="list-group-item">{singleObj?.price} x {singleObj?.quantity}</li>
+                        <li className="list-group-item">{singleObj?.price} x {props?.count}</li>
                     </ul>
                 </div>
             </>
