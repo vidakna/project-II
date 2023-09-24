@@ -16,7 +16,6 @@ const loginSchema = yup.object({
 });
 
 const Login = () => {
-  
   const dispatch=useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -26,7 +25,9 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       dispatch(loginUser(values));
-      window.location.reload(true)
+      const newUrl = '/';
+      navigate(newUrl);
+      window.location.reload(true);
     },
 
   });
