@@ -18,6 +18,7 @@ const Checkout = () => {
   const [phone , setPhone] = useState("")
   const [city , setCity] = useState("")
   const [zip , setZip ] = useState("")
+  const [coupon , setCoupon ] = useState("")
 
   useEffect(()=>{
     getCartInfo();
@@ -32,6 +33,18 @@ const Checkout = () => {
       setCartPrice(parseInt(localStorage.getItem('cartPrice')));
       setIsCartLoading(false)
     }
+  }
+
+  const applyCoupon = (e) =>{
+    e.preventDefault();
+    // get coupon
+    axios.get(`${base_url}coupon/getByName/${coupon}`).then((res)=>{
+      const c = res.data.discount;
+      setCartPrice(cartPrice * ((100 - c) / 100))
+      alert("YOUR COUPON APPLIED")
+    }).catch((e)=>{
+      alert("YOUR COUPON IS INVALID")
+    })
   }
 
 
@@ -139,6 +152,7 @@ const Checkout = () => {
                 Tharindu irugalbandara (madurangairugalbandara@gmail.com)
               </p>
               <h4 className="mb-3">Shipping Address</h4>
+              <h5>Your cart price : RS {cartPrice}</h5>
               <form
                 action=""
                 className="d-flex gap-15 flex-wrap justify-content-between"
@@ -211,6 +225,24 @@ const Checkout = () => {
                     className="form-control"
                   />
                 </div>
+
+                <div className="w-100">
+                  <div className="d-flex justify-content-between align-items-center">
+                    <input
+                        style={{width:"200px"}}
+                        type="text"
+                        value={coupon}
+                        onChange={(e)=>{setCoupon(e.target.value)}}
+                        placeholder="coupon"
+                        className="form-control"
+                    />
+                    <button className="button" onClick={applyCoupon}>
+                      Apply coupon
+                    </button>
+                  </div>
+                </div>
+
+
                 <div className="w-100">
                   <div className="d-flex justify-content-between align-items-center">
                     <Link to="/cart" className="text-dark">

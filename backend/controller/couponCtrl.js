@@ -50,10 +50,30 @@ const getCoupon = asynHandler(async(req, res) => {
         throw new Error(error);
     }
 });
+
+const getCouponByName = asynHandler(async (req , res) =>{
+    const {couponName} = req.params;
+
+    try {
+        // Search for the coupon by name in the database
+        const coupon = await Coupon.findOne({ name: couponName.toUpperCase() });
+
+        if (!coupon) {
+            return res.status(404).json({ message: "Coupon not found" });
+        }
+
+        res.status(200).json(coupon);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+})
+
 module.exports = {
     createCoupon,
     getAllCoupons,
     updateCoupon,
     deleteCoupon,
     getCoupon,
+    getCouponByName
 };
