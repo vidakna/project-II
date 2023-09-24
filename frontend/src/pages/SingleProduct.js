@@ -21,6 +21,7 @@ import axios from "axios";
 import {productService} from "../features/products/productService";
 import {authService} from "../features/user/userService";
 import {addToCartLocal} from "../features/cart/CartService";
+import {base_url} from "../utills/axiosConfig";
 
 const SingleProduct = () => {
   const location=useLocation();
@@ -127,11 +128,33 @@ const SingleProduct = () => {
   }
 
   const [qty , setQty] = useState(1)
-  const addToCart = (itemId) =>{
-    const updatedObject = { ...productState, selectedQty: parseInt(qty) };
-    addToCartLocal(updatedObject , qty)
+  const [avb , setAvb] = useState(0)
+  const checkAvailability = async (product) => {
+    try {
+      const response = await axios.get(`${base_url}product/${product._id}`);
+      const updatedAvb = response.data.quantity;
+      setAvb(updatedAvb);
 
-  }
+      return product.selectedQty < updatedAvb;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  };
+
+  const addToCart = async (itemId) => {
+    const updatedObject = { ...productState, selectedQty: parseInt(qty) };
+    const isAvailable = await checkAvailability(updatedObject);
+
+    if (isAvailable) {
+      addToCartLocal(updatedObject, qty);
+      alert("Item added to the cart");
+    } else {
+      alert("Selected item quantity is greater than existing stock.");
+    }
+  };
+
+
 
   return (
     <>
@@ -273,8 +296,6 @@ const SingleProduct = () => {
                   <div className="d-flex align-items-center gap-30 ms-5">
                     <button
                       className="button border-0"
-                      data-bs-toggle="modal"
-                      data-bs-target="#staticBackdrop"
                       type="button"
                       onClick={() => addToCart(productState._id)}
                     >
