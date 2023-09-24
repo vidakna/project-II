@@ -837,7 +837,7 @@ const passwordReset = asyncHandler(async (req , res) =>{
 
         const mailOptions = {
             from: `${process.env.MAIL_ID}`, // Replace with your Gmail email
-            to: `bluephoenix783@gmail.com`,
+            to: `${user.email}`,
             subject: 'Verification Code',
             text: `Your verification code is: http://localhost:3000/reset-password/${user._id.toString()}`,
         };
