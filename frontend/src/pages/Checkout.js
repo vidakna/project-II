@@ -55,7 +55,7 @@ const Checkout = () => {
       const o = {
         _id : obj._id,
         count : obj.selectedQty,
-        color : "64d630e0cd312f71dbe8f019",
+        color : obj.color,
       }
 
       cartA.push(o)

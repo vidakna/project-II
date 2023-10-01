@@ -3,7 +3,7 @@ import axios from "axios";
 import {base_url} from "../utils/baseUrl";
 import {config} from "../utils/axiosconfig";
 
-const OrderItem = ({productId}) =>{
+const OrderItem = ({productId , color , qty}) =>{
 
     const [item , setItem]  = useState(null);
     const [loading , setLoading] = useState(true)
@@ -42,7 +42,8 @@ const OrderItem = ({productId}) =>{
             <ul className="list-group list-group-flush">
                 <li className="list-group-item">{item?.category}</li>
                 <li className="list-group-item">{item?.description && item.description.replace(/<[^>]+>/g, '')}</li>
-                <li className="list-group-item">{item?.price} x {item?.quantity}</li>
+                <li className="list-group-item">{item?.price} x {qty}</li>
+                <li className="list-group-item" ><span style={{backgroundColor:color , color:"transparent"}}>{color}</span></li>
             </ul>
         </div>
     </div>)

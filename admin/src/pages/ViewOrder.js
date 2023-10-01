@@ -122,7 +122,7 @@ const ViewOrder = () => {
               {orderState?.products.map((e)=>{
                 return(
                     <div>
-                      <OrderItem productId={e.product}></OrderItem>
+                      <OrderItem productId={e.product} color={e.color} qty = {e.count}></OrderItem>
                     </div>
                 )
               })}
