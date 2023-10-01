@@ -1,5 +1,8 @@
+
+
 const Product = require("../models/productModel");
 const User = require("../models/userMOdel");
+const Color = require("../models/colorModel");
 const fs = require("fs");
 const asyncHandler = require("express-async-handler");
 const slugify = require("slugify");
@@ -104,6 +107,10 @@ const getaProduct = asyncHandler(async(req, res) => {
     const { id } = req.params;
     try {
         const findProduct = await Product.findById(id);
+        const colors = await Color.find({ _id: { $in: findProduct.color } });
+
+        findProduct.color = colors
+
         res.json(findProduct);
     } catch (error) {
         throw new Error(error);

@@ -1,13 +1,17 @@
 import React from "react";
 
-const Color = () => {
+const Color = ({colors , slectedColor}) => {
   return (
     <>
       <ul className="colors ps-0">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+          {colors && colors.map((color)=>{
+              return(
+                  <>
+                  <li style={{backgroundColor:color.title}}></li>
+                      <input value={color.title} type="radio" name="input" onChange={slectedColor}/>
+                  </>
+              )
+          })}
       </ul>
     </>
   );

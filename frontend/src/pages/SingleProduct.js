@@ -129,6 +129,12 @@ const SingleProduct = () => {
 
   const [qty , setQty] = useState(1)
   const [avb , setAvb] = useState(0)
+  const [color , setColor] = useState(null)
+
+  const ChangeColor= (e) =>{
+    setColor(e.target.value)
+  }
+
   const checkAvailability = async (product) => {
     try {
       const response = await axios.get(`${base_url}product/${product._id}`);
@@ -143,7 +149,7 @@ const SingleProduct = () => {
   };
 
   const addToCart = async (itemId) => {
-    const updatedObject = { ...productState, selectedQty: parseInt(qty) };
+    const updatedObject = { ...productState, selectedQty: parseInt(qty), color :  color};
     const isAvailable = await checkAvailability(updatedObject);
 
     if (isAvailable) {
@@ -276,7 +282,7 @@ const SingleProduct = () => {
                 </div>
                 <div className="d-flex gap-10 flex-column mt-2 mb-3">
                   <h3 className="product-heading">Color :</h3>
-                  <Color />
+                  <Color colors={productState?.color} slectedColor={ChangeColor} />
                 </div>
                 <div className="d-flex align-items-center gap-15 flex-row mt-2 mb-3">
                   <h3 className="product-heading">Quantity :</h3>

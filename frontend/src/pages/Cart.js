@@ -101,6 +101,7 @@ const Cart = () => {
                 <div className="cart-header py-3 d-flex justify-content-between align-items-center">
                   <h4 className="cart-col-1">Product</h4>
                   <h4 className="cart-col-2">Price</h4>
+                  <h4 className="cart-col-2">Color</h4>
                   <h4 className="cart-col-3">Quantity</h4>
                   <h4 className="cart-col-4">Total</h4>
                 </div>
@@ -124,6 +125,9 @@ const Cart = () => {
                         </div>
                         <div className="cart-col-2">
                           <h5 className="price">{obj.price}</h5>
+                        </div>
+                        <div className="cart-col-2">
+                          <h5 className="price" style={{backgroundColor:obj.color , width : "40px" , color:"transparent"}}>{obj.color}</h5>
                         </div>
                         <div className="cart-col-3 d-flex align-items-center gap-15">
                           <div>
