@@ -25,9 +25,12 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       dispatch(loginUser(values));
-      const newUrl = '/';
-      navigate(newUrl);
-      window.location.reload(true);
+      setTimeout(()=>{
+        const newUrl = '/';
+        navigate(newUrl);
+        window.location.reload(true);
+      } , 500)
+
     },
 
   });
