@@ -26,15 +26,25 @@ const Login = () => {
     onSubmit: (values) => {
       dispatch(loginUser(values));
       setTimeout(()=>{
-        const newUrl = '/';
-        navigate(newUrl);
-        window.location.reload(true);
+
+        const u = localStorage.getItem("customer");
+
+        if(u != null) {
+          const u1 = JSON.parse(u);
+
+          if(u1.email === values.email){
+            const newUrl = '/';
+            navigate(newUrl);
+            window.location.reload(true);
+          }
+        }
+
+
       } , 500)
 
     },
 
   });
-
 
   const navigate = useNavigate();
 
