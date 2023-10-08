@@ -31,6 +31,14 @@ const SingleProduct = () => {
   const productState=useSelector(state=>state.product.product)
 
 
+  const [isLoged, setIsLoged] = useState(true);
+
+  useEffect(()=>{
+    if(localStorage.getItem("token") == null){
+      setIsLoged(false)
+    }
+  })
+
   let sourceData = ""
 
   function getFileExtension(url) {
@@ -304,6 +312,7 @@ const SingleProduct = () => {
                       className="button border-0"
                       type="button"
                       onClick={() => addToCart(productState._id)}
+                      disabled={!isLoged}
                     >
                       Add to Cart
                     </button>
