@@ -185,7 +185,7 @@ const Home = () => {
           <div className="col-12">
             <h3 className="section-heading">Featured Collection</h3>
           </div>
-          {productState &&
+          {productState && productState.length > 0 &&
           productState?.map((item,index)=>{
             if (item.tags === "featured"){
               const imageUrl = item?.images?.length > 0 ? item.images[0]?.url : "";
@@ -423,7 +423,7 @@ const Home = () => {
           </div>
         </div>
         <div className="row">
-          {productState &&
+          {productState && productState.length > 0 &&
           productState?.map((item,index)=>{
             if (item.tags === "popular"){
               const imageUrl = item?.images?.length > 0 ? item.images[0]?.url : "";
