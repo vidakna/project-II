@@ -126,7 +126,13 @@ const ProductCard = (props) => {
 
   const addToWish= (id) =>{
     // alert(id);
-    dispatch(addToWishlist(id));
+    if(localStorage.getItem("token") != null){
+      dispatch(addToWishlist(id));
+      alert("YOUR ITEM HAS BEEN ADDED TO WISHLIST")
+    }else{
+      alert("PLEASE LOGIN")
+    }
+
   };
 
   // Check if data is truthy and an array
