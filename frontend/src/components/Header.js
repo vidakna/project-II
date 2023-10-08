@@ -1,5 +1,5 @@
 import React, {useEffect, useState , useRef } from "react";
-import { NavLink, Link } from "react-router-dom";
+import {NavLink, Link, useNavigate} from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import compare from "../images/compare.svg";
 import wishlist from "../images/wishlist.svg";
@@ -17,6 +17,7 @@ const Header = () => {
   const [cartPrice, setCartPrice] = useState(0);
   const dropdownRef = useRef(null);
   const [isToken , setIsToken] = useState(false);
+  const navigate = useNavigate();
   useEffect(()=>{
     if(localStorage.getItem("token") == null){
       setIsToken(false);
@@ -56,8 +57,9 @@ const Header = () => {
     filterProducts(inputValue);
   };
 
-  const clearInput = () => {
-    searchInput("")
+  const clearInput = (e) => {
+    navigate('/product/' + e);
+    window.location.reload(true);
   }
 
   const logout = () =>{
@@ -99,9 +101,9 @@ const Header = () => {
                   <ul className="list-group mt-2" style={{ zIndex: 100 , position: 'absolute'}}>
                     {filteredProducts.map((product) => (
                         <li key={product.id} className="list-group-item">
-                          <Link to={'/product/'+product?._id} className="border-0 bg-transparent event" onClick={clearInput}>
+                          <button to={'/product/'+product?._id} className="border-0 bg-transparent event" onClick={() => clearInput(product?._id)}>
                             {product.title}
-                          </Link>
+                          </button>
                         </li>
                     ))}
                   </ul>
